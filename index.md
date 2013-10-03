@@ -1,6 +1,5 @@
 ---
 title       : rCharts
-subtitle    : Part 1
 author      : Ramnath Vaidyanathan
 framework   : minimal
 highlighter : prettify
