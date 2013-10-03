@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>rCharts</title>
+    <link rel="stylesheet" href="libraries/frameworks/minimal/stylesheets/styles.css">
+    <link rel="stylesheet" href="libraries/highlighters/prettify/css/twitter-bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+        <link rel=stylesheet href="./assets/css/app.css"></link>
+<link rel=stylesheet href="./assets/css/gh-buttons.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+<link rel=stylesheet href="http://fonts.googleapis.com/css?family=PT+Sans"></link>
+
+    
+  </head>
+  <body>
+    <div class="wrapper">
+<header>
+  <h1>rCharts</h1>
+  <p>Part 1</p>
+  
+  <!-- <img width='150px' src='assets/img/'></img>
+  -->
+  <p class="view">
+    <!-- <a href="http://github.com/rcharts/howitworks">
+     View the Project on GitHub <small>rcharts/howitworks</small>
+    </a>
+    <img width='150px' src='assets/img/'></img>
+    -->
+  </p>
+  <ul class='buttons'>
+    <li><a href="https://github.com/rcharts/howitworks/zipball/gh-pages">
+      Download <strong>ZIP File</strong>
+    </a></li>
+    <li><a href="https://github.com/rcharts/howitworks/tarball/gh-pages">
+      Download <strong>TAR Ball</strong>
+    </a></li>
+    <li><a href="http://github.com/rcharts/howitworks">
+      Fork On <strong>GitHub</strong></a>
+    </li>
+  </ul>
+    <ol>
+    </ol>
+  <p><a href='http://rcharts.io'>rCharts</a> is an R package, that helps create, customize and share interactive javascript visualizations from R, using a familiar lattice-like interface. You can install it from <a href='http://ramnathv.github.io/rCharts'>github</a>
+  </p>
+</header>
+
+      <section>
+        <h1>How rCharts Works?</h1>
+<!-- AddThis Smart Layers BEGIN -->
+
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fdfcfd4773d48d3"></script>
+
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'transparent',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }   
+  });
+</script>
+
+<!-- AddThis Smart Layers END -->
+
+<p><a href="http://prose.io/#rcharts/howitworks/edit/gh-pages/index.Rmd" class="button icon edit">Edit Page</a></p>
+
+<p>This is a two-part series on how rCharts works. My objective is to show you how easy it is to integrate a javascript visualization library into rCharts, and take advantage of a single-unified interface and other functionalities. </p>
+
+<p>In this tutorial, I will go over the steps to integrate <a href="http://imaginea.github.io/uvCharts/">uvCharts</a>, a new-entrant to the rapidly expanding set of wrapper libraries to <a href="http://d3js.org">d3js</a>. Specifically, we will recreate this barchart, which was created using uvCharts.</p>
+
+<p><iframe
+  style="width: 100%; height: 600px"
+  src="http://jsfiddle.net/RR8Ub/1/embedded/result,resources,js,html">
+</iframe></p>
+
+<p>Browse through the <code>resources</code>, <code>javascript</code> and <code>html</code> tabs to get a sense of how the chart works.</p>
+
+<h3>Resources</h3>
+
+<p>The resources required by a chart include the external javascript and css files that are included either in the head of the html document or at the end. rCharts uses a convention over configuration approach, and so the resources are specified using a <code>config.yml</code> file as shown below.</p>
+
+<p>The <a href="libraries/widgets/uvcharts/config.yml">config</a> file basically provides paths to the js/css files, both locally and  online using a cdn. </p>
+
+<pre><code class="yaml">uvcharts:
+  jshead: [js/d3.v3.min.js, js/uvcharts.js]
+  cdn:
+    jshead:
+      - &quot;http://cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js&quot;
+      - &quot;http://imaginea.github.io/uvCharts/js/uvcharts.js&quot;
+</code></pre>
+
+<p>At this point, the <code>uvCharts</code> library folder will look like this</p>
+
+<pre><code>uvCharts
+  js
+    d3.v3.min.js
+    uvcharts.js
+  config.yml
+</code></pre>
+
+<h3>Javascript</h3>
+
+<p>Our next step is to split the javascript for the chart into (1) a mustache layout, and then populate it using a <code>json</code> payload processed by R. </p>
+
+<p><iframe
+  style="width: 100%; height: 600px"
+  src="http://jsfiddle.net/RR8Ub/1/embedded/js">
+</iframe></p>
+
+
+<p>By default, <code>rCharts</code> bundles all data into a single json variable <code>chartParams</code>. In addition to <code>chartParams</code>, it also sends <code>chartId</code> to the layout. So, we will begin by replacing all data in the javascript with the json payload that <code>rCharts</code> will return. We follow conventions and save this layout to <code>layouts/chart.html</code>.</p>
+
+<h4>Layout</h4>
+
+<pre><code class="html">&lt;script&gt;
+  var graphdef = {{{ chartParams }}}
+  var config = {
+    meta: {
+      position: &quot;#{{ chartId }}&quot;
+    }
+  }
+  var chart = uv.chart(graphdef.type, graphdef, config)
+&lt;/script&gt;
+</code></pre>
+
+<p>At this point our <a href="libraries/widgets/uvCharts">uvCharts</a> library folder is going to look like this </p>
+
+<pre><code>uvCharts
+  js
+    d3.v3.min.js
+    uvcharts.js
+  layouts
+    chart.html
+  config.yml
+</code></pre>
+
+<h4>Payload</h4>
+<p>Different d3js wrapper libraries tend to use different data structures. Our goal with <code>rCharts</code> is to provide a single-unified interface for specifying a chart, so that a user does not need to worry about the underlying format used by a specific library. This can be easily achieved by writing functions that transform data to different formats, as required by the library.</p>
+
+<p>Shown below is the dataset that we will be working with. We need to convert it into an R object, that when converted to JSON will look like the object <code>dataset</code> seen in the <code>javascript</code> shown above.</p>
+
+<pre><code class="r">hair_eye_male &lt;- subset(as.data.frame(HairEyeColor), Sex == &quot;Male&quot;)
+head(hair_eye_male)
+</code></pre>
+
+<pre><code>   Hair   Eye  Sex Freq
+1 Black Brown Male   32
+2 Brown Brown Male   53
+3   Red Brown Male   10
+4 Blond Brown Male    3
+5 Black  Blue Male   11
+6 Brown  Blue Male   50
+</code></pre>
+
+<p>We will now write a <code>make_dataset</code> data transformation function that takes <code>x</code>, <code>y</code>, <code>data</code> and <code>group</code> as inputs, and returns a data structure that when converted to JSON will match what we need. The basic idea behind <code>make_dataset</code> is to (a) rename the <code>x</code>, <code>y</code> columns to <code>name</code>, <code>value</code>, (b) split the <code>data</code> based on <code>group</code> and (c) convert each piece into a JSON array.</p>
+
+<pre><code class="r">make_dataset &lt;- function(x, y, data, group = NULL){
+  require(plyr)
+  dat &lt;- rename(data, setNames(c(&#39;name&#39;, &#39;value&#39;), c(x, y)))
+  dat &lt;- dat[c(&#39;name&#39;, &#39;value&#39;, group)]
+  if (!is.null(group)){
+    dlply(dat, group, toJSONArray, json = F)
+  } else {
+    list(main = toJSONArray(dat, json = F)) 
+  }
+}
+</code></pre>
+
+<p>You can run the code below to check that it produces the same <code>dataset</code> variable seen in the javascript above.</p>
+
+<pre><code class="r">dataset = make_dataset(&#39;Hair&#39;, &#39;Freq&#39;, hair_eye_male, group = &#39;Eye&#39;)
+cat(RJSONIO::toJSON(dataset))
+</code></pre>
+
+<h3>Chart Creation</h3>
+<p>It is now time to put everything together and create the chart from R. We initialize the chart as an instance of <code>rCharts</code>, use the <code>setLib</code> method to point to the location of the library folder, and then pass the data payload using the <code>set</code> method.</p>
+
+<pre><code class="r">u1 &lt;- rCharts$new()
+u1$setLib(&quot;libraries/widgets/uvcharts&quot;)
+u1$set(
+  type = &#39;Bar&#39;,
+  categories = names(dataset),
+  dataset = dataset,
+  dom = &#39;chart1&#39;
+)
+u1
+</code></pre>
+
+<iframe src=assets/fig/unnamed-chunk-4.html seamless></iframe>
+
+<p>You could save all this code in an file named <a href="assets/code/mychart.R">myChart.R</a> and then publish the chart along with the code by running.</p>
+
+<pre><code class="r">u2 &lt;- create_chart(&#39;assets/code/myChart.R&#39;)
+u2$publish(&#39;My Chart&#39;)
+</code></pre>
+
+<p>You can simplify the chart creation interface further, by wrapping everything into a <code>uPlot</code> function</p>
+
+<pre><code class="r">uPlot &lt;- function(x, y, data, group = NULL, ...){
+  dataset = make_dataset(x = x, y = y, data = data, group = group)
+  u1 &lt;- rCharts$new()
+  u1$setLib(&quot;libraries/widgets/uvcharts&quot;)
+  u1$set(
+    categories = names(dataset),
+    dataset = dataset,
+    ...
+  )
+  return(u1)
+}
+</code></pre>
+
+<p>Let us create a <code>StackedBar</code> chart using <code>uPlot</code></p>
+
+<pre><code class="r">uPlot(&quot;Hair&quot;, &quot;Freq&quot;, 
+  data = hair_eye_male, 
+  group = &quot;Eye&quot;,
+  type = &#39;StackedBar&#39;
+)
+</code></pre>
+
+<iframe src=assets/fig/stackedbar.html seamless></iframe>
+
+<div id='disqus_thread'></div>
+
+      </section>
+      <footer>
+        <p>Maintained by <a href="http://github.com/rcharts">
+          Ramnath Vaidyanathan
+        </a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by 
+          <a href="https://github.com/orderedlist">orderedlist</a></small>
+        </p>
+      </footer>    </div>
+    <script src="libraries/frameworks/minimal/javascripts/scale.fix.js"></script>
+  </body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <script type="text/javascript">
+    var disqus_shortname = 'rcharts';
+    (function() {
+      var dsq = document.createElement('script'); 
+      dsq.type = 'text/javascript'; 
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+  <!-- Google Prettify -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+  <script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+  <script>
+    var pres = document.getElementsByTagName("pre");
+    for (var i=0; i < pres.length; ++i) {
+      pres[i].className = "prettyprint linenums";
+    }
+    prettyPrint();
+  </script>
+  <!-- End Google Prettify --> 
+  </html>

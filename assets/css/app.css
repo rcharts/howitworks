@@ -1,0 +1,17 @@
+ol.linenums {margin-left: -10px;}
+p, li{
+  text-align: justify;
+  font-size: 16px;
+  line-height:1.4em;
+  font-family: "PT Sans"
+}
+iframe{
+  height: 600px;
+  width: 100%;
+}
+code {
+  color: #D14;
+}
+h1 {
+  color: darkslategray;
+}

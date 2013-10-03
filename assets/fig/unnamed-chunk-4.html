@@ -1,0 +1,134 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js' type='text/javascript'></script>
+    <script src='http://imaginea.github.io/uvCharts/js/uvcharts.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 800px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body>
+    <div id='chart1' class='rChart uvcharts'></div>  
+    
+    <script>
+  var graphdefchart1 = {
+ "dom": "chart1",
+"width":    800,
+"height":    400,
+"type": "Bar",
+"categories": [ "Brown", "Blue", "Hazel", "Green" ],
+"dataset": {
+ "Brown": [
+ {
+ "name": "Black",
+"value":     32,
+"Eye": "Brown" 
+},
+{
+ "name": "Brown",
+"value":     53,
+"Eye": "Brown" 
+},
+{
+ "name": "Red",
+"value":     10,
+"Eye": "Brown" 
+},
+{
+ "name": "Blond",
+"value":      3,
+"Eye": "Brown" 
+} 
+],
+"Blue": [
+ {
+ "name": "Black",
+"value":     11,
+"Eye": "Blue" 
+},
+{
+ "name": "Brown",
+"value":     50,
+"Eye": "Blue" 
+},
+{
+ "name": "Red",
+"value":     10,
+"Eye": "Blue" 
+},
+{
+ "name": "Blond",
+"value":     30,
+"Eye": "Blue" 
+} 
+],
+"Hazel": [
+ {
+ "name": "Black",
+"value":     10,
+"Eye": "Hazel" 
+},
+{
+ "name": "Brown",
+"value":     25,
+"Eye": "Hazel" 
+},
+{
+ "name": "Red",
+"value":      7,
+"Eye": "Hazel" 
+},
+{
+ "name": "Blond",
+"value":      5,
+"Eye": "Hazel" 
+} 
+],
+"Green": [
+ {
+ "name": "Black",
+"value":      3,
+"Eye": "Green" 
+},
+{
+ "name": "Brown",
+"value":     15,
+"Eye": "Green" 
+},
+{
+ "name": "Red",
+"value":      7,
+"Eye": "Green" 
+},
+{
+ "name": "Blond",
+"value":      8,
+"Eye": "Green" 
+} 
+] 
+},
+"id": "chart1" 
+}
+  var configchart1 = {
+    meta: {
+      position: "#chart1"
+    }
+  }
+  var chartchart1 = uv.chart(graphdefchart1.type, 
+    graphdefchart1,
+    configchart1
+  );
+</script>
+    
+  </body>
+</html>
