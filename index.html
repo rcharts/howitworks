@@ -180,7 +180,7 @@ cat(RJSONIO::toJSON(dataset))
 </code></pre>
 
 <h3>Chart Creation</h3>
-<p>It is now time to put everything together and create the chart from R. We initialize the chart as an instance of <code>rCharts</code>, use the <code>setLib</code> method to point to the location of the library folder, and then pass the data payload using the <code>set</code> method.</p>
+<p>It is now time to put everything together and create the chart from R. We initialize the chart as an instance of <code>rCharts</code>, use the <code>setLib</code> method to point to the location of the library folder, and then pass the data payload using the <code>set</code> method. </p>
 
 <pre><code class="r">u1 &lt;- rCharts$new()
 u1$setLib(&quot;libraries/widgets/uvcharts&quot;)
@@ -194,6 +194,8 @@ u1
 </code></pre>
 
 <iframe src=assets/fig/unnamed-chunk-4.html seamless></iframe>
+
+<p>For the above code to work, you need to make sure that you have <a href="https://github.com/rcharts/howitworks/zipball/gh-pages">downloaded</a> this repo, and are referring to the correct path to the <code>uvCharts</code> library.</p>
 
 <p>You could save all this code in an file named <a href="assets/code/mychart.R">myChart.R</a> and then publish the chart along with the code by running.</p>
 
@@ -226,6 +228,8 @@ u2$publish(&#39;My Chart&#39;)
 </code></pre>
 
 <iframe src=assets/fig/stackedbar.html seamless></iframe>
+
+<p>So you can see for yourself, how easy it is to integrate a javascript visualization library into <code>rCharts</code>. Now, the <a href="http://imaginea.github.io/uvCharts/documentation.html">uvCharts</a> API provides more functionality to customize the chart. While, we can use nested lists with the <code>set</code> method to access this functionality, it would be cleaner to write custom methods that make things easier. We will go over this in Part 2 of this series.</p>
 
 <div id='disqus_thread'></div>
 

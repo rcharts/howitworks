@@ -153,7 +153,7 @@ cat(RJSONIO::toJSON(dataset))
 
 ### Chart Creation
 
-It is now time to put everything together and create the chart from R. We initialize the chart as an instance of `rCharts`, use the `setLib` method to point to the location of the library folder, and then pass the data payload using the `set` method.
+It is now time to put everything together and create the chart from R. We initialize the chart as an instance of `rCharts`, use the `setLib` method to point to the location of the library folder, and then pass the data payload using the `set` method. 
 
 ```{r}
 u1 <- rCharts$new()
@@ -166,6 +166,8 @@ u1$set(
 )
 u1
 ```
+
+For the above code to work, you need to make sure that you have [downloaded](https://github.com/rcharts/howitworks/zipball/gh-pages) this repo, and are referring to the correct path to the `uvCharts` library.
 
 You could save all this code in an file named [myChart.R](assets/code/mychart.R) and then publish the chart along with the code by running.
 
@@ -199,6 +201,9 @@ uPlot("Hair", "Freq",
   type = 'StackedBar'
 )
 ```
+
+So you can see for yourself, how easy it is to integrate a javascript visualization library into `rCharts`. Now, the [uvCharts](http://imaginea.github.io/uvCharts/documentation.html) API provides more functionality to customize the chart. While, we can use nested lists with the `set` method to access this functionality, it would be cleaner to write custom methods that make things easier. We will go over this in Part 2 of this series.
+
 
 <div id='disqus_thread'></div>
 
