@@ -187,7 +187,7 @@ u1
 
 For the above code to work, you need to make sure that you have [downloaded](https://github.com/rcharts/howitworks/zipball/gh-pages) this repo, and are referring to the correct path to the `uvCharts` library.
 
-You could save all this code in an file named [myChart.R](assets/code/mychart.R) and then publish the chart along with the code by running.
+You could save all this code in an file named [myChart.R](assets/code/mychart.R) and then publish the chart along with the code by running the code below. The published chart can be seen [here](http://rcharts.io/viewer/?3b61ed669d7f15156520)
 
 ```r
 u2 <- create_chart('assets/code/myChart.R')
