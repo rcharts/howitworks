@@ -14,6 +14,7 @@
 <link rel=stylesheet href="./assets/css/gh-buttons.css"></link>
 <link rel=stylesheet href="./assets/css/ribbons.css"></link>
 <link rel=stylesheet href="http://fonts.googleapis.com/css?family=PT+Sans"></link>
+<link rel=stylesheet href="http://odyniec.net/articles/turning-lists-into-trees/css/tree.css"></link>
 
     
   </head>
@@ -100,12 +101,17 @@
 
 <p>At this point, the <code>uvCharts</code> library folder will look like this</p>
 
-<pre><code>uvCharts
-  js
-    d3.v3.min.js
-    uvcharts.js
-  config.yml
-</code></pre>
+<ul class="tree" id="tree">
+  <li>js
+    <ul>
+      <li>d3.v3.min.js</li>
+      <li>uvcharts.js</li>
+    </ul>
+  </li>
+  <li>config.yml</li>
+</ul>
+
+<p><br/></p>
 
 <h3>Javascript</h3>
 
@@ -134,14 +140,21 @@
 
 <p>At this point our <a href="libraries/widgets/uvCharts">uvCharts</a> library folder is going to look like this </p>
 
-<pre><code>uvCharts
-  js
-    d3.v3.min.js
-    uvcharts.js
-  layouts
-    chart.html
-  config.yml
-</code></pre>
+<ul class="tree" id="tree">
+  <li>js
+    <ul>
+      <li>d3.v3.min.js</li>
+      <li>uvcharts.js</li>
+    </ul>
+  </li>
+  <li>layouts
+    <ul>
+      <li>chart.html</li>
+    </ul>
+  <li>config.yml</li>
+</ul>
+
+<p><br/></p>
 
 <h4>Payload</h4>
 <p>Different d3js wrapper libraries tend to use different data structures. Our goal with <code>rCharts</code> is to provide a single-unified interface for specifying a chart, so that a user does not need to worry about the underlying format used by a specific library. This can be easily achieved by writing functions that transform data to different formats, as required by the library.</p>

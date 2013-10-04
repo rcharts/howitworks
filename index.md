@@ -8,7 +8,9 @@ mode        : selfcontained
 github      : {user: rcharts, repo: howitworks, branch: gh-pages}
 widgets     : [disqus]
 assets:
-  css: "http://fonts.googleapis.com/css?family=PT+Sans"
+  css: 
+    - "http://fonts.googleapis.com/css?family=PT+Sans"
+    - "http://odyniec.net/articles/turning-lists-into-trees/css/tree.css"
 ---
 
 # How rCharts Works?
@@ -26,7 +28,6 @@ assets:
   });
 </script>
 <!-- AddThis Smart Layers END -->
-
 
 
 
@@ -62,14 +63,17 @@ uvcharts:
 
 At this point, the `uvCharts` library folder will look like this
 
-```
-uvCharts
-  js
-    d3.v3.min.js
-    uvcharts.js
-  config.yml
-```
+<ul class="tree" id="tree">
+  <li>js
+    <ul>
+      <li>d3.v3.min.js</li>
+      <li>uvcharts.js</li>
+    </ul>
+  </li>
+  <li>config.yml</li>
+</ul>
 
+<br/>
 
 ### Javascript
 
@@ -100,15 +104,21 @@ By default, `rCharts` bundles all data into a single json variable `chartParams`
 
 At this point our [uvCharts](libraries/widgets/uvCharts) library folder is going to look like this 
 
-```
-uvCharts
-  js
-    d3.v3.min.js
-    uvcharts.js
-  layouts
-    chart.html
-  config.yml
-```
+<ul class="tree" id="tree">
+  <li>js
+    <ul>
+      <li>d3.v3.min.js</li>
+      <li>uvcharts.js</li>
+    </ul>
+  </li>
+  <li>layouts
+    <ul>
+      <li>chart.html</li>
+    </ul>
+  <li>config.yml</li>
+</ul>
+
+<br/>
 
 ---
 
