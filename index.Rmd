@@ -6,7 +6,7 @@ highlighter : prettify
 hitheme     : twitter-bootstrap
 mode        : selfcontained
 github      : {user: rcharts, repo: howitworks, branch: gh-pages}
-widgets     : [disqus]
+widgets     : [disqus, ganalytics]
 assets:
   css: 
     - "http://fonts.googleapis.com/css?family=PT+Sans"
