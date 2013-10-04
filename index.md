@@ -67,10 +67,10 @@ At this point, the `uvCharts` library folder will look like this
   <li>js
     <ul>
       <li>d3.v3.min.js</li>
-      <li>uvcharts.js</li>
+      <li class="last">uvcharts.js</li>
     </ul>
   </li>
-  <li>config.yml</li>
+  <li class="last">config.yml</li>
 </ul>
 
 <br/>
@@ -108,14 +108,14 @@ At this point our [uvCharts](libraries/widgets/uvCharts) library folder is going
   <li>js
     <ul>
       <li>d3.v3.min.js</li>
-      <li>uvcharts.js</li>
+      <li class="last">uvcharts.js</li>
     </ul>
   </li>
   <li>layouts
     <ul>
-      <li>chart.html</li>
+      <li class="last">chart.html</li>
     </ul>
-  <li>config.yml</li>
+  <li class="last">config.yml</li>
 </ul>
 
 <br/>
