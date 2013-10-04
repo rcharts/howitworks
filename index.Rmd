@@ -217,7 +217,13 @@ uPlot("Hair", "Freq",
 )
 ```
 
-So you can see for yourself, how easy it is to integrate a javascript visualization library into `rCharts`. Now, the [uvCharts](http://imaginea.github.io/uvCharts/documentation.html) API provides more functionality to customize the chart. While, we can use nested lists with the `set` method to access this functionality, it would be cleaner to write custom methods that make things easier. We will go over this in Part 2 of this series.
+So you can see for yourself, how easy it is to integrate a javascript visualization library into `rCharts`. 
+
+The [uvCharts](http://imaginea.github.io/uvCharts/documentation.html) API provides more functionality to customize the chart. While, we can use nested lists with the `set` method to access this functionality, it would be cleaner to write custom methods that follow the unified interface and make things easier. We will go over this in Part 2 of this series.
+
+### Acknowledgements
+
+I would like to thank [Kenton Russell](http://github.com/timelyportfolio) for his valuable suggestions and comments, which helped improve this post.
 
 
 <div id='disqus_thread'></div>
