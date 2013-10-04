@@ -247,7 +247,7 @@ The [uvCharts](http://imaginea.github.io/uvCharts/documentation.html) API provid
 
 ### Acknowledgements
 
-I would like to thank [Kenton Russell](http://github.com/timelyportfolio) for his valuable suggestions and comments, which helped improve this post.
+I would like to thank [TimelyPortfolio](http://github.com/timelyportfolio) for his valuable suggestions and comments, which helped improve this post.
 
 
 <div id='disqus_thread'></div>
