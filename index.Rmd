@@ -37,7 +37,7 @@ opts_chunk$set(results = 'asis', comment = NA, tidy = F)
 
 <a href="http://prose.io/#{{page.github.user}}/{{page.github.repo}}/edit/gh-pages/index.Rmd" class="button icon edit">Edit Page</a>
 
-This is a two-part series on how rCharts works. My objective is to show you how easy it is to integrate a javascript visualization library into rCharts, and take advantage of a single-unified interface and other functionalities. 
+This is a multi-part series on how rCharts works. My objective is to show you how easy it is to integrate a javascript visualization library into rCharts, and take advantage of a single-unified interface and other functionalities. 
 
 In this tutorial, I will go over the steps to integrate [uvCharts](http://imaginea.github.io/uvCharts/), a new-entrant to the rapidly expanding set of wrapper libraries to [d3js](http://d3js.org). Specifically, we will recreate this barchart, which was created using uvCharts.
 
