@@ -44,11 +44,11 @@ In this tutorial, I will go over the steps to integrate [uvCharts](http://imagin
   src="http://jsfiddle.net/RR8Ub/1/embedded/result,resources,js,html">
 </iframe>
 
-Browse through the `resources`, `javascript` and `html` tabs to get a sense of how the chart works.
+Browse through the `resources`, `javascript` and `html` tabs in the jsFiddle to get a sense of how the chart works.  rCharts will need to create each of these sections.  We will now go through these sections one by one.
 
 ### Resources
 
-The resources required by a chart include the external javascript and css files that are included either in the head of the html document or at the end. rCharts uses a convention over configuration approach, and so the resources are specified using a `config.yml` file as shown below.
+The resources required by a chart include the external javascript `<script src = "...js">` and css files `<link href="...css" rel="stylesheet">` that are included either in the head of the html document or at the end. rCharts uses a convention over configuration approach, and so the resources are specified using a `config.yml` file as shown below.
 
 The [config](libraries/widgets/uvcharts/config.yml) file basically provides paths to the js/css files, both locally and  online using a cdn. 
 
@@ -77,7 +77,7 @@ At this point, the `uvCharts` library folder will look like this
 
 ### Javascript
 
-Our next step is to split the javascript for the chart into (1) a mustache layout, and then populate it using a `json` payload processed by R. 
+Our next step is to split the javascript for the chart into (1) a mustache layout, and then populate it using a `json` payload processed by R.  
 
 <iframe
   style="width: 100%; height: 600px"
@@ -86,7 +86,7 @@ Our next step is to split the javascript for the chart into (1) a mustache layou
 
 --- .RAW
 
-By default, `rCharts` bundles all data into a single json variable `chartParams`. In addition to `chartParams`, it also sends `chartId` to the layout. So, we will begin by replacing all data in the javascript with the json payload that `rCharts` will return. We follow conventions and save this layout to `layouts/chart.html`.
+By default, `rCharts` bundles all data and parameters into a single json variable `chartParams`. In addition to `chartParams`, it also sends `chartId` to the layout. So, we will begin by replacing all data in the javascript with `{{{ chartParams }}}`.  rCharts uses the `whisker` package to replace ```{{{ chartParams }}}` with the json payload.   Although we could technically save this file anywhere, we will follow the rCharts conventions and save this layout to `layouts/chart.html`.
 
 #### Layout
 
@@ -124,7 +124,7 @@ At this point our [uvCharts](libraries/widgets/uvCharts) library folder is going
 
 #### Payload
 
-Different d3js wrapper libraries tend to use different data structures. Our goal with `rCharts` is to provide a single-unified interface for specifying a chart, so that a user does not need to worry about the underlying format used by a specific library. This can be easily achieved by writing functions that transform data to different formats, as required by the library.
+Different d3js wrapper libraries tend to use different data structures. Our goal with `rCharts` is to provide a single-unified interface for specifying a chart, so that a user does not need to worry about the underlying format used by a specific library. This can be easily achieved by writing functions that transform data (usually a `data.frame` to different formats, as required by the library.
 
 Shown below is the dataset that we will be working with. We need to convert it into an R object, that when converted to JSON will look like the object `dataset` seen in the `javascript` shown above.
 
@@ -146,7 +146,7 @@ head(hair_eye_male)
 ```
 
 
-We will now write a `make_dataset` data transformation function that takes `x`, `y`, `data` and `group` as inputs, and returns a data structure that when converted to JSON will match what we need. The basic idea behind `make_dataset` is to (a) rename the `x`, `y` columns to `name`, `value`, (b) split the `data` based on `group` and (c) convert each piece into a JSON array.
+We will now write a `make_dataset` data transformation function in R that takes `x`, `y`, `data` and `group` as inputs, and returns a data structure that when converted to JSON will match what we need. The basic idea behind `make_dataset` is to (a) rename the `x`, `y` columns to `name`, `value`, (b) split the `data` based on `group` and (c) convert each piece into a JSON array.
 
 
 
@@ -177,12 +177,13 @@ cat(RJSONIO::toJSON(dataset))
 
 ### Chart Creation
 
-It is now time to put everything together and create the chart from R. We initialize the chart as an instance of `rCharts`, use the `setLib` method to point to the location of the library folder, and then pass the data payload using the `set` method. 
+It is now time to create the chart from R. We initialize the chart as an instance of `rCharts`, use the `setLib` method to point to the location of the library folder, and then pass the data payload using the `set` method. 
 
 
 ```r
 u1 <- rCharts$new()
 u1$setLib("libraries/widgets/uvcharts")
+#u1$setLib("http://rcharts.io/howitworks/index.Rmd)  #not sure if you want to show this
 u1$set(
   type = 'Bar',
   categories = names(dataset),
@@ -204,7 +205,7 @@ u2 <- create_chart('assets/code/myChart.R')
 u2$publish('My Chart')
 ```
 
-You can simplify the chart creation interface further, by wrapping everything into a `uPlot` function
+For many libraries rCharts already simplifies the steps.  Similarly, you can simplify the chart creation interface further, by wrapping everything into a `uPlot` function
 
 
 ```r
