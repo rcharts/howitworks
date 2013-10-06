@@ -75,23 +75,29 @@
 
 <p><a href="http://prose.io/#rcharts/howitworks/edit/gh-pages/part2/index.Rmd" class="button icon edit">Edit Page</a></p>
 
-<p>This is a multi-part series on how rCharts works. My objective is to show you how easy it is to integrate a javascript visualization library into rCharts, and take advantage of a single-unified interface and other functionalities.</p>
+<p>This is the second part of a multi-part series on how rCharts works. My objective is to show you how easy it is to integrate a javascript visualization library into rCharts, and take advantage of a single-unified interface and other functionalities.</p>
 
 <p>In the <a href="http://rcharts.io/howitworks">first part</a>, I showed you how to integrate <a href="http://imaginea.github.io/uvCharts/">uvCharts</a> with rCharts, and create a simple barchart, straight from R. In this second part, I will take you through the steps required to expose the full API of uvCharts, so that all customization features are directly accessible from R.</p>
 
 <h2>uvCharts</h2>
 
-<p>From the <a href="http://imaginea.github.io/uvCharts/documentation.html">documentation page</a> of uvCharts, we observe that all charts are specified using a single function that accepts three arguments.</p>
+<p>From the <a href="http://imaginea.github.io/uvCharts/documentation.html">documentation page</a> of uvCharts, we observe that all charts are specified using a single function <code>uv.chart</code>.</p>
 
 <pre><code class="js">var chartObject = uv.chart(chartType, graphDefinition, optionalConfiguration)
 </code></pre>
+
+<p>It accepts three arguments.</p>
+
+<ul>
+<li><a href="http://imaginea.github.io/uvCharts/documentation.html#charts">chartType</a> is a string that specifies the type of the chart (e.g. BarChart).</li>
+<li><a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef">graphDefinition</a> is a json object consisting of <a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef-categories">categories</a> and <a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef-categories">dataset</a>, that specify the different groups and the dataset (name-value pairs) corresponding to each group.</li>
+<li> <a href="http://imaginea.github.io/uvCharts/documentation.html#configuration">optionalConfiguration</a> is a json object consisting of different configuration elements (e.g. <a href="http://imaginea.github.io/uvCharts/documentation.html#config-meta">meta</a>, <a href="http://imaginea.github.io/uvCharts/documentation.html#config-margin">margin</a> etc), each of which consists of key-value pairs.</li>
+</ul>
 
 <p><iframe
   style="width: 100%; height: 650px"
   src="http://jsfiddle.net/ramnathv/w669V/2/embedded/js,result">
 </iframe></p>
-
-<p><code>chartType</code> is a string that specifies the type of the chart (e.g. BarChart). <a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef">graphDefinition</a> is a json object consisting of <a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef-categories">categories</a> and <a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef-categories">dataset</a>, that specify the different groups and the dataset (name-value pairs) corresponding to each group. <a href="http://imaginea.github.io/uvCharts/documentation.html#configuration">optionalConfiguration</a> is a json object consisting of different configuration elements (e.g. <code>meta</code>, <code>margin</code> etc), each of which consists of key-value pairs.</p>
 
 <p>Our objective now is to translate this javascript into a mustache layout and populate it with data and parameters from R</p>
 
@@ -110,9 +116,9 @@
 </code></pre>
 
 <h2>Reference Class</h2>
-<p><code>rCharts</code> uses an object-oriented approach called reference classes, that allows common functionality to be bundled into a parent class, and library specific functionality to be defined or overridden in the child class.</p>
+<p><code>rCharts</code> uses an object-oriented approach called <a href="http://adv-r.had.co.nz/OO-essentials.html#rc">reference classes</a>, that allows common functionality to be bundled into a parent class, and library specific functionality to be defined or overridden in the child class.</p>
 
-<p>In Part 1 of this series, we had directly used the <code>rCharts</code> base class and the generic <code>set</code> and <code>setLib</code> methods to integrate <code>uvCharts</code>. However, for greater flexibility, it is better to implement <code>uvCharts</code> as a separate class.</p>
+<p>In Part 1 of this series, we had directly used the <code>rCharts</code> base class and the generic <code>set</code> and <code>setLib</code> methods to integrate <code>uvCharts</code>. However, for greater flexibility, it is better to implement <code>uvCharts</code> as a separate class that inherits from the <code>rCharts</code> base class.</p>
 
 <pre><code class="r">Uvcharts &lt;- setRefClass(&#39;Uvcharts&#39;, contains = &#39;rCharts&#39;, 
   methods = list(
@@ -127,11 +133,11 @@
 )
 </code></pre>
 
-<p>We define the <code>Uvcharts</code> class to be a child class that inherits from the parent <code>rCharts</code> class. The <code>initialize</code> method executes the default initialization code for all <code>rCharts</code> classes using <code>callSuper()</code>, and then sets the <code>meta</code> parameter of <code>config</code> to &#39;#uv-div&#39;.</p>
+<p>We define the <code>Uvcharts</code> class to be a reference class that <strong>contains</strong> the parent <code>rCharts</code> class. This allows <code>Uvcharts</code> to inherit all common functionality, like publishing, integration with Shiny etc. The <code>initialize</code> method uses <code>callSuper()</code> to execute the default initialization code for all <code>rCharts</code> classes, and then sets the <code>meta</code> parameter of <code>config</code> to &#39;#uv-div&#39;.</p>
 
-<p>The <code>config</code> method allows different configuration elements to be specified easily without having to resort to a convoluted sequence of nested lists. Note that these methods allows users to build a visualization in steps, rather than having to specify everything in a single function call.</p>
+<p>The <code>config</code> method allows different configuration elements to be specified easily without having to resort to a convoluted sequence of nested lists. Note that these methods allows users to build a visualization in steps, rather than having to specify everything in a single function call. Moreover, reference classes have state, and so you can avoid writing statements like <code>x &lt;- x + ...</code></p>
 
-<p>Our final step is to wrap all this into a <code>uPlot</code> function. To keep things flexible, we use the <code>...</code> parameter to allow a user to specify configuration related parameters directly using <code>uPlot</code>.</p>
+<p>Now that all the hard work is done, our final step is to wrap the <code>Uvcharts</code> class into a <code>uPlot</code> function, that will be the primary interface through which a user will create charts. The <code>uPlot</code> function returns an instance of the <code>rCharts</code> class, whic allows a user to customize the plot further using helper methods. However, we also allow a user to pass configuration related parameters directly to <code>uPlot</code>,  use the ubiquitous <code>...</code>.</p>
 
 <pre><code class="r">uPlot &lt;- function(x, y, data, group = NULL, type, ...){
   dataset = make_dataset(x = x, y = y, data = data, group = group)
@@ -148,9 +154,10 @@
 }
 </code></pre>
 
-<p>Now, it is time to recreate the chart</p>
+<p>Now, it is time to recreate the chart using our new <code>Uvcharts</code> class and its new helper methods. Make sure to update your rCharts installation before trying this code in your R console.</p>
 
-<pre><code class="r">hair_eye_male &lt;- subset(as.data.frame(HairEyeColor), Sex == &quot;Male&quot;)
+<pre><code class="r"># devtools::install_github(&quot;rCharts&quot;, &quot;ramnathv&quot;, ref = &quot;dev&quot;)
+hair_eye_male &lt;- subset(as.data.frame(HairEyeColor), Sex == &quot;Male&quot;)
 dataset = make_dataset(&#39;Hair&#39;, &#39;Freq&#39;, hair_eye_male, group = &#39;Eye&#39;)
 u1 &lt;- uPlot(&quot;Hair&quot;, &quot;Freq&quot;, 
   data = hair_eye_male, 
@@ -168,6 +175,25 @@ u1
 </code></pre>
 
 <iframe src=assets/fig/myplot.html seamless></iframe>
+
+<p><br/></p>
+
+<h3>Conclusions</h3>
+
+<p>I have hopefully convinced you by now, how easy it is to integrate javascript based visualization libraries with rCharts, making them reusable, and faster to incorporate. </p>
+
+<p>The underlying rationale behind my design of rCharts is twofold.</p>
+
+<ul>
+<li>The size of the javascript/d3.js developer community is always going to an order of magnitude higher than the R community. Moreover, the d3.js community has already created a huge number of <a href="http://biovisualize.github.io/d3visualization/">interactive visualizations</a>, that we can take advantage of. </li>
+<li>As rCharts users start creating more visualizations that make use of these d3.js libraries, we will have a bigger voice in feature requests and enhancements (which is already happening for some libraries like polycharts and dimplejs) </li>
+</ul>
+
+<p>One of my goals behind writing this series of posts is to encourage more R users to contribute to the development of reusable interactive visualizations. You can pick any of the more than 1900 visualizations in this <a href="http://biovisualize.github.io/d3visualization/">gallery</a> and write an rCharts wrapper for it. For more pointers on how to do this, I would recommend reading this <a href="http://timelyportfolio.github.io/rCharts_d3_horizon/">excellent post</a> by <a href="http://github.com/timelyportfolio">@timelyportfolio</a> on integrating a d3.js horizon chart with rCharts.</p>
+
+<p>In the long run, I envisage a <strong>reproducible</strong>, <strong>searchable</strong>, <strong>tagged</strong> gallery of interactive visualizations like <a href="http://rcharts.io/gallery">this one</a>, that will allow R users to quickly identify a visualization that is appropriate for their situation, fork the underlying code, and adapt it to suit their need.</p>
+
+<p>The next part of this series will show you how to share your interactive chart as a <a href="http://rcharts.io/viewer/?6847603">standalone chart</a>, or as a part of a <a href="http://rcharts.io/nytinteractive/">knitr/slidify document</a>, or wrapped into a shiny application(<a href="http://glimmer.rstudio.com/ramnathv/BikeShare/">http://glimmer.rstudio.com/ramnathv/BikeShare/</a>).</p>
 
 <h3>Acknowledgements</h3>
 
