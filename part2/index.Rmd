@@ -38,7 +38,7 @@ require(knitr)
 opts_chunk$set(results = 'asis', comment = NA, tidy = F)
 ```
 
-<a href="http://prose.io/#{{page.github.user}}/{{page.github.repo}}/edit/gh-pages/index.Rmd" class="button icon edit">Edit Page</a>
+<a href="http://prose.io/#{{page.github.user}}/{{page.github.repo}}/edit/gh-pages/part2/index.Rmd" class="button icon edit">Edit Page</a>
 
 This is a multi-part series on how rCharts works. My objective is to show you how easy it is to integrate a javascript visualization library into rCharts, and take advantage of a single-unified interface and other functionalities.
 
@@ -58,7 +58,7 @@ var chartObject = uv.chart(chartType, graphDefinition, optionalConfiguration)
   src="http://jsfiddle.net/ramnathv/w669V/2/embedded/js,result">
 </iframe>
 
-`chartType` is a string that specifies the type of the chart (e.g. BarChart). `graphDefinition` is a json object consisting of `categories` and `dataset`, that specify the different groups and the dataset (name-value pairs) corresponding to each group. `optionalConfiguration` is a json object consisting of different configuration elements (e.g. `meta`, `margin` etc), each of which consists of key-value pairs.
+`chartType` is a string that specifies the type of the chart (e.g. BarChart). [graphDefinition](http://imaginea.github.io/uvCharts/documentation.html#graphdef) is a json object consisting of [categories](http://imaginea.github.io/uvCharts/documentation.html#graphdef-categories) and [dataset](http://imaginea.github.io/uvCharts/documentation.html#graphdef-categories), that specify the different groups and the dataset (name-value pairs) corresponding to each group. [optionalConfiguration](http://imaginea.github.io/uvCharts/documentation.html#configuration) is a json object consisting of different configuration elements (e.g. `meta`, `margin` etc), each of which consists of key-value pairs.
 
 Our objective now is to translate this javascript into a mustache layout and populate it with data and parameters from R
 
@@ -66,7 +66,7 @@ Our objective now is to translate this javascript into a mustache layout and pop
 
 ## Layout
 
-The mustache layout shown below is a modified version of what we developed in Part 1. The basic idea is to bundle the entire payload into a single json object `chartParams` (which is returned by default), and recover `graphdef`, `config` and `type` from it. Just as a reminder `foo.bar` in javascript is equivalent to `foo$bar` in R.
+The mustache layout shown below is a modified version of what we developed in [Part 1](http://rcharts.io/howitworks). The basic idea is to bundle the entire payload into a single json object `chartParams` (which is returned by default), and recover `graphdef`, `config` and `type` from it. Just as a reminder `foo.bar` in javascript is equivalent to `foo$bar` in R.
 
 ```html
 <script>

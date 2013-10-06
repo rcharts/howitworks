@@ -73,7 +73,7 @@
 
 <!-- AddThis Smart Layers END -->
 
-<p><a href="http://prose.io/#rcharts/howitworks/edit/gh-pages/index.Rmd" class="button icon edit">Edit Page</a></p>
+<p><a href="http://prose.io/#rcharts/howitworks/edit/gh-pages/part2/index.Rmd" class="button icon edit">Edit Page</a></p>
 
 <p>This is a multi-part series on how rCharts works. My objective is to show you how easy it is to integrate a javascript visualization library into rCharts, and take advantage of a single-unified interface and other functionalities.</p>
 
@@ -91,12 +91,12 @@
   src="http://jsfiddle.net/ramnathv/w669V/2/embedded/js,result">
 </iframe></p>
 
-<p><code>chartType</code> is a string that specifies the type of the chart (e.g. BarChart). <code>graphDefinition</code> is a json object consisting of <code>categories</code> and <code>dataset</code>, that specify the different groups and the dataset (name-value pairs) corresponding to each group. <code>optionalConfiguration</code> is a json object consisting of different configuration elements (e.g. <code>meta</code>, <code>margin</code> etc), each of which consists of key-value pairs.</p>
+<p><code>chartType</code> is a string that specifies the type of the chart (e.g. BarChart). <a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef">graphDefinition</a> is a json object consisting of <a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef-categories">categories</a> and <a href="http://imaginea.github.io/uvCharts/documentation.html#graphdef-categories">dataset</a>, that specify the different groups and the dataset (name-value pairs) corresponding to each group. <a href="http://imaginea.github.io/uvCharts/documentation.html#configuration">optionalConfiguration</a> is a json object consisting of different configuration elements (e.g. <code>meta</code>, <code>margin</code> etc), each of which consists of key-value pairs.</p>
 
 <p>Our objective now is to translate this javascript into a mustache layout and populate it with data and parameters from R</p>
 
 <h2>Layout</h2>
-<p>The mustache layout shown below is a modified version of what we developed in Part 1. The basic idea is to bundle the entire payload into a single json object <code>chartParams</code> (which is returned by default), and recover <code>graphdef</code>, <code>config</code> and <code>type</code> from it. Just as a reminder <code>foo.bar</code> in javascript is equivalent to <code>foo$bar</code> in R.</p>
+<p>The mustache layout shown below is a modified version of what we developed in <a href="http://rcharts.io/howitworks">Part 1</a>. The basic idea is to bundle the entire payload into a single json object <code>chartParams</code> (which is returned by default), and recover <code>graphdef</code>, <code>config</code> and <code>type</code> from it. Just as a reminder <code>foo.bar</code> in javascript is equivalent to <code>foo$bar</code> in R.</p>
 
 <pre><code class="html">&lt;script&gt;
   var chartParams = {{{ chartParams }}},
