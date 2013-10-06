@@ -167,7 +167,7 @@ One of my goals behind writing this series of posts is to encourage more R users
 
 In the long run, I envisage a __reproducible__, __searchable__, __tagged__ gallery of interactive visualizations like [this one](http://rcharts.io/gallery), that will allow R users to quickly identify a visualization that is appropriate for their situation, fork the underlying code, and adapt it to suit their need.
 
-The next part of this series will show you how to share your interactive chart as a [standalone chart](http://rcharts.io/viewer/?6847603), or as a part of a [knitr/slidify document](http://rcharts.io/nytinteractive/), or wrapped into a shiny application(http://glimmer.rstudio.com/ramnathv/BikeShare/).
+The next part of this series will show you how to share your interactive chart as a [standalone chart](http://rcharts.io/viewer/?6847603), or as a part of a [knitr/slidify document](http://rcharts.io/nytinteractive/), or wrapped into a [shiny application](http://glimmer.rstudio.com/ramnathv/BikeShare/).
 
 ### Acknowledgements
 
