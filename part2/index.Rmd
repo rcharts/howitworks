@@ -84,9 +84,9 @@ The mustache layout shown below is a modified version of what we developed in Pa
 
 ## Reference Class
 
-`rCharts` uses an object-oriented approach called reference classes, that allows common functionality to be bundled into a parent class, and library specific functionality to be defined or overridden in the child class.
+`rCharts` uses an object-oriented approach called [reference classes](http://adv-r.had.co.nz/OO-essentials.html#rc), that allows common functionality to be bundled into a parent class, and library specific functionality to be defined or overridden in the child class.
 
-In Part 1 of this series, we had directly used the `rCharts` base class and the generic `set` and `setLib` methods to integrate `uvCharts`. However, for greater flexibility, it is better to implement `uvCharts` as a separate class.
+In Part 1 of this series, we had directly used the `rCharts` base class and the generic `set` and `setLib` methods to integrate `uvCharts`. However, for greater flexibility, it is better to implement `uvCharts` as a separate class that inherits from the `rCharts` base class.
 
 ```r
 Uvcharts <- setRefClass('Uvcharts', contains = 'rCharts', 
@@ -102,11 +102,11 @@ Uvcharts <- setRefClass('Uvcharts', contains = 'rCharts',
 )
 ```
 
-We define the `Uvcharts` class to be a child class that inherits from the parent `rCharts` class. The `initialize` method executes the default initialization code for all `rCharts` classes using `callSuper()`, and then sets the `meta` parameter of `config` to '#uv-div'.
+We define the `Uvcharts` class to be a child class that inherits from the parent `rCharts` class with `contains = 'rCharts'`. The `initialize` method executes the default initialization code for all `rCharts` classes using `callSuper()`, and then sets the `meta` parameter of `config` to '#uv-div'.
 
 The `config` method allows different configuration elements to be specified easily without having to resort to a convoluted sequence of nested lists. Note that these methods allows users to build a visualization in steps, rather than having to specify everything in a single function call.
 
-Our final step is to wrap all this into a `uPlot` function. To keep things flexible, we use the `...` parameter to allow a user to specify configuration related parameters directly using `uPlot`.
+Our final step is to wrap all this into a `uPlot` function shown below. To keep things flexible, we use the `...` parameter to allow a user to specify configuration related parameters directly using `uPlot`.
 
 ```{r eval = F}
 uPlot <- function(x, y, data, group = NULL, type, ...){
@@ -124,7 +124,7 @@ uPlot <- function(x, y, data, group = NULL, type, ...){
 }
 ```
 
-Now, it is time to recreate the chart
+Now, it is time to recreate the chart using our new `Uvcharts` class and its new helper methods.
 
 ```{r myplot}
 hair_eye_male <- subset(as.data.frame(HairEyeColor), Sex == "Male")
