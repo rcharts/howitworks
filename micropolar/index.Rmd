@@ -57,7 +57,7 @@ u1
 
 ### Other Chart Types
 
-We are working on some useful examples of R data with the other `micropolar` chart types.  For now, let's look at the chart types using the defaults specified by `micropolar`.
+We are working on some useful examples of R data with the other `micropolar` chart types.  For now, let's look at each chart type using the defaults specified by `micropolar`.
 
 ```{r results = 'asis', comment = NA, cache = F}
 u2 <- rCharts$new()
