@@ -55,7 +55,7 @@
         <h2>Micropolar with rCharts</h2>
 <p><a href="http://micropolar.org">Micropolar</a> is a polar chart library made with <code>d3.js</code>. I saw the announcement on twitter by <a href="https://twitter.com/d3visualization">@d3visualization</a> and could not resist the urge to integrate it with rCharts.</p>
 
-<p>I should say that <code>micropolar</code> is an extremely well designed library, and was actually really easy integrating with <code>rCharts</code>. You can find the library folder <a href="../libraries/widgets/micropolar">here</a>.</p>
+<p>I should say that <code>micropolar</code> is extremely well designed for reusability.  The author Chris Viau is also a coauthor of the very good book <a href="http://bleedingedgepress.com/our-books/developing-a-d3-js-edge/">Developing a D3.js Edge</a> that details how to make <code>d3.js</code> charts reusable.  Well designed reusable charts integrate easily with <code>rCharts</code>.</p>
 
 <p>We need a helper function to transform a data frame to the format required by micropolar.</p>
 
@@ -77,7 +77,7 @@ u1$setLib(&#39;http://rcharts.github.io/howitworks/libraries/widgets/micropolar&
 u1$set(
   data = make_dataset(&#39;x&#39;, &#39;y&#39;, dat),
   type = &#39;dotPlot&#39;,
-  width = 600,
+  width = 400,
   height = 400
 )
 u1

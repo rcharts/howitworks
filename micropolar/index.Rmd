@@ -49,8 +49,8 @@ u1$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
 u1$set(
   data = make_dataset('x', 'y', dat),
   type = 'dotPlot',
-  width = 600,
-  height = 600
+  width = 400,
+  height = 400
 )
 u1
 ```
