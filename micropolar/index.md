@@ -30,6 +30,7 @@ We need a helper function to transform a data frame to the format required by mi
 
 ```r
 make_dataset = function(x, y, data = data){
+  require(rCharts)
   lapply(toJSONArray2(data[c(x, y)], json = F, names = F), unlist)
 }
 
