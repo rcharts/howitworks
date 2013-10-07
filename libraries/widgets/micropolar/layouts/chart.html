@@ -1,0 +1,7 @@
+<script>
+  var chartParams{{chartId}} = {{{ chartParams }}}
+  chartParams{{chartId}}.containerSelector = '#{{chartId}}'
+  micropolar.factory[chartParams{{chartId}}.type](
+    chartParams{{chartId}}
+  )
+</script>
