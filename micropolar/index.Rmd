@@ -50,7 +50,7 @@ u1$set(
   data = make_dataset('x', 'y', dat),
   type = 'dotPlot',
   width = 600,
-  height = 400
+  height = 600
 )
 u1
 ```
