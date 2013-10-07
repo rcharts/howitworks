@@ -26,7 +26,7 @@ We need a helper function to transform a data frame to the format required by mi
 
 ```{r message = F, echo = F, cache = F}
 library(knitr)
-opts_chunk$set(results = 'asis', comment = NA, tidy = F)
+opts_chunk$set(results = 'asis', comment = NA, tidy = F, cache = F)
 ```
 
 ```{r}
@@ -53,6 +53,39 @@ u1$set(
   height = 400
 )
 u1
+```
+
+### Other Chart Types
+
+We are working on some useful examples combining R data with the other `micropolar` chart types.  For now, let's look at each chart type using the defaults specified by `micropolar`.
+
+```{r results = 'asis', comment = NA, cache = F}
+u2 <- rCharts$new()
+u2$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
+u2$set(
+  type = 'linePlot',
+  width = 400,
+  height = 400
+)
+u2
+```
+
+```{r results = 'asis', comment = NA, cache = F}
+u3 <- u2
+u3$set( type = 'areaChart' )
+u3
+```
+
+```{r results = 'asis', comment = NA, cache = F}
+u4 <- u2
+u4$set( type = 'barChart' )
+u4
+```
+
+```{r results = 'asis', comment = NA, cache = F}
+u5 <- u2
+u5$set( type = 'clock' )
+u5
 ```
 
 <div id='disqus_thread'></div>
