@@ -1,5 +1,5 @@
 micropolar:
-  jshead: [js/d3.v3.min.js, js/micropolar.js]
+  jshead: [js/d3.js, js/micropolar.js]
   css: [css/style.css]
   cdn:
     jshead:
