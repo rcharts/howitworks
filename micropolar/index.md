@@ -41,25 +41,25 @@ dat = data.frame(
 ```
 
 
-### Example 1
+### DotPlot
 
 
 ```r
+require(rCharts)
+options(RCHART_HEIGHT = 400, RCHART_WIDTH = 400)
 u1 <- rCharts$new()
 u1$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
 u1$set(
   data = make_dataset('x', 'y', dat),
-  type = 'dotPlot',
-  width = 400,
-  height = 400
+  type = 'dotPlot'
 )
 u1
 ```
 
-<iframe src=assets/fig/unnamed-chunk-3.html seamless></iframe>
+<iframe src=assets/fig/dotPlot.html seamless></iframe>
 
 
-### Other Chart Types
+### LinePlot
 
 We are working on some useful examples combining R data with the other `micropolar` chart types.  For now, let's look at each chart type using the defaults specified by `micropolar`.
 
@@ -67,16 +67,14 @@ We are working on some useful examples combining R data with the other `micropol
 ```r
 u2 <- rCharts$new()
 u2$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
-u2$set(
-  type = 'linePlot',
-  width = 400,
-  height = 400
-)
+u2$set(type = 'linePlot')
 u2
 ```
 
-<iframe src=assets/fig/unnamed-chunk-4.html seamless></iframe>
+<iframe src=assets/fig/linePlot.html seamless></iframe>
 
+
+### AreaChart
 
 
 ```r
@@ -85,8 +83,10 @@ u3$set( type = 'areaChart' )
 u3
 ```
 
-<iframe src=assets/fig/unnamed-chunk-5.html seamless></iframe>
+<iframe src=assets/fig/areaChart.html seamless></iframe>
 
+
+### BarChart
 
 
 ```r
@@ -95,8 +95,10 @@ u4$set( type = 'barChart' )
 u4
 ```
 
-<iframe src=assets/fig/unnamed-chunk-6.html seamless></iframe>
+<iframe src=assets/fig/barChart.html seamless></iframe>
 
+
+### Clock
 
 
 ```r
@@ -105,9 +107,21 @@ u5$set( type = 'clock' )
 u5
 ```
 
-<iframe src=assets/fig/unnamed-chunk-7.html seamless></iframe>
+<iframe src=assets/fig/clock.html seamless></iframe>
 
 
 <div id='disqus_thread'></div>
+
+<style>
+iframe {
+  height: 410px;
+}
+</style>
+
+### Acknowledgements
+
+I would like to thank [TimelyPortfolio](http://github.com/timelyportfolio) for adding most of the examples in this post!
+
+
 
 

@@ -70,59 +70,71 @@ dat = data.frame(
 )
 </code></pre>
 
-<h3>Example 1</h3>
+<h3>DotPlot</h3>
 
-<pre><code class="r">u1 &lt;- rCharts$new()
+<pre><code class="r">require(rCharts)
+options(RCHART_HEIGHT = 400, RCHART_WIDTH = 400)
+u1 &lt;- rCharts$new()
 u1$setLib(&#39;http://rcharts.github.io/howitworks/libraries/widgets/micropolar&#39;)
 u1$set(
   data = make_dataset(&#39;x&#39;, &#39;y&#39;, dat),
-  type = &#39;dotPlot&#39;,
-  width = 400,
-  height = 400
+  type = &#39;dotPlot&#39;
 )
 u1
 </code></pre>
 
-<iframe src=assets/fig/unnamed-chunk-3.html seamless></iframe>
+<iframe src=assets/fig/dotPlot.html seamless></iframe>
 
-<h3>Other Chart Types</h3>
+<h3>LinePlot</h3>
 
 <p>We are working on some useful examples combining R data with the other <code>micropolar</code> chart types.  For now, let&#39;s look at each chart type using the defaults specified by <code>micropolar</code>.</p>
 
 <pre><code class="r">u2 &lt;- rCharts$new()
 u2$setLib(&#39;http://rcharts.github.io/howitworks/libraries/widgets/micropolar&#39;)
-u2$set(
-  type = &#39;linePlot&#39;,
-  width = 400,
-  height = 400
-)
+u2$set(type = &#39;linePlot&#39;)
 u2
 </code></pre>
 
-<iframe src=assets/fig/unnamed-chunk-4.html seamless></iframe>
+<iframe src=assets/fig/linePlot.html seamless></iframe>
+
+<h3>AreaChart</h3>
 
 <pre><code class="r">u3 &lt;- u2
 u3$set( type = &#39;areaChart&#39; )
 u3
 </code></pre>
 
-<iframe src=assets/fig/unnamed-chunk-5.html seamless></iframe>
+<iframe src=assets/fig/areaChart.html seamless></iframe>
+
+<h3>BarChart</h3>
 
 <pre><code class="r">u4 &lt;- u2
 u4$set( type = &#39;barChart&#39; )
 u4
 </code></pre>
 
-<iframe src=assets/fig/unnamed-chunk-6.html seamless></iframe>
+<iframe src=assets/fig/barChart.html seamless></iframe>
+
+<h3>Clock</h3>
 
 <pre><code class="r">u5 &lt;- u2
 u5$set( type = &#39;clock&#39; )
 u5
 </code></pre>
 
-<iframe src=assets/fig/unnamed-chunk-7.html seamless></iframe>
+<iframe src=assets/fig/clock.html seamless></iframe>
 
 <div id='disqus_thread'></div>
+
+<style>
+iframe {
+  height: 410px;
+}
+</style>
+
+<h3>Acknowledgements</h3>
+
+<p>I would like to thank <a href="http://github.com/timelyportfolio">TimelyPortfolio</a> for adding most of the examples in this post!</p>
 
       </section>
       <footer>
