@@ -1,4 +1,4 @@
-micropolar = {};
+﻿micropolar = {version: '0.1.0'};
 micropolar.chart = {};
 
 micropolar.chart.RadialAxis = function module() {
@@ -325,7 +325,7 @@ micropolar.chart.PolarAreaChart = function module() {
                         var h = radialScale(d[1]); 
                         var baseW = Math.tan(triangleAngle) * h;
                         return 'M'+[[0, 0], [h, baseW], [h, -baseW]].join('L')+'Z' },
-                    transform: function(d, i){ return 'rotate('+ (axisConfig.originTheta - 90 + (angularScale(i))) +')'}
+                    transform: function(d, i){ return 'rotate('+ (axisConfig.originTheta + 90 + (angularScale(i))) +')'}
                     // transform: function(d, i){ return 'rotate('+ (axisConfig.originTheta - 90 + (angularScale(d[0]))) +')'}
                 })
 
@@ -448,7 +448,7 @@ function linePlot(_config){
     var config = {
         data: d3.range(0, 721, 1).map(function(deg, index){ return [deg, index/720*2]; }),
         height: 250, 
-        width: 250, 
+        width: 300, 
         angularDomain: [0, 360, 45], 
         flip: false,
         originTheta: 0,
