@@ -110,6 +110,10 @@ u5
 <iframe src=assets/fig/clock.html seamless></iframe>
 
 
+### Acknowledgements
+
+I would like to thank [TimelyPortfolio](http://github.com/timelyportfolio) for adding most of the examples in this post!
+
 <div id='disqus_thread'></div>
 
 <style>
@@ -118,9 +122,6 @@ iframe {
 }
 </style>
 
-### Acknowledgements
-
-I would like to thank [TimelyPortfolio](http://github.com/timelyportfolio) for adding most of the examples in this post!
 
 
 
