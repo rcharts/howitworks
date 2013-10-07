@@ -85,6 +85,43 @@ u1
 
 <iframe src=assets/fig/unnamed-chunk-3.html seamless></iframe>
 
+<h3>Other Chart Types</h3>
+
+<p>We are working on some useful examples of R data with the other <code>micropolar</code> chart types.  For now, let&#39;s look at the chart types using the defaults specified by <code>micropolar</code>.</p>
+
+<pre><code class="r">u2 &lt;- rCharts$new()
+u2$setLib(&#39;http://rcharts.github.io/howitworks/libraries/widgets/micropolar&#39;)
+u2$set(
+  type = &#39;linePlot&#39;,
+  width = 400,
+  height = 400
+)
+u2
+</code></pre>
+
+<iframe src=assets/fig/unnamed-chunk-4.html seamless></iframe>
+
+<pre><code class="r">u3 &lt;- u2
+u3$set( type = &#39;areaChart&#39; )
+u3
+</code></pre>
+
+<iframe src=assets/fig/unnamed-chunk-5.html seamless></iframe>
+
+<pre><code class="r">u4 &lt;- u2
+u4$set( type = &#39;barChart&#39; )
+u4
+</code></pre>
+
+<iframe src=assets/fig/unnamed-chunk-6.html seamless></iframe>
+
+<pre><code class="r">u5 &lt;- u2
+u5$set( type = &#39;clock&#39; )
+u5
+</code></pre>
+
+<iframe src=assets/fig/unnamed-chunk-7.html seamless></iframe>
+
 <div id='disqus_thread'></div>
 
       </section>
