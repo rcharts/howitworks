@@ -46,7 +46,7 @@ dat = data.frame(
 
 ```r
 u1 <- rCharts$new()
-u1$setLib('../libraries/widgets/micropolar')
+u1$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
 u1$set(
   data = make_dataset('x', 'y', dat),
   type = 'dotPlot',
