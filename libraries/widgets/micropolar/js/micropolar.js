@@ -326,7 +326,7 @@ micropolar.chart.PolarAreaChart = function module() {
                         var baseW = Math.tan(triangleAngle) * h;
                         return 'M'+[[0, 0], [h, baseW], [h, -baseW]].join('L')+'Z' },
                     transform: function(d, i){ return 'rotate('+ (axisConfig.originTheta  + (angularScale(i))) +')'}
-                    //transform: function(d, i){ return 'rotate('+ (axisConfig.originTheta - 90 + (angularScale(d[0]))) +')'}
+                    // transform: function(d, i){ return 'rotate('+ (axisConfig.originTheta - 90 + (angularScale(d[0]))) +')'}
                 })
 
         });
