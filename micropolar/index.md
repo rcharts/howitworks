@@ -12,7 +12,6 @@ assets:
     - "http://fonts.googleapis.com/css?family=PT+Sans"
     - "../assets/css/app.css"
     - "../assets/css/gh-buttons.css"
-    - "http://odyniec.net/articles/turning-lists-into-trees/css/tree.css"
 url: {lib: ../libraries}
 ---
 
@@ -48,7 +47,7 @@ dat = data.frame(
 require(rCharts)
 options(RCHART_HEIGHT = 400, RCHART_WIDTH = 400)
 u1 <- rCharts$new()
-u1$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
+u1$setLib('http://timelyportfolio.github.io/howitworks/libraries/widgets/micropolar')
 u1$set(
   data = make_dataset('x', 'y', dat),
   type = 'dotPlot'
@@ -66,7 +65,7 @@ We are working on some useful examples combining R data with the other `micropol
 
 ```r
 u2 <- rCharts$new()
-u2$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
+u2$setLib('http://timelyportfolio.github.io/howitworks/libraries/widgets/micropolar')
 u2$set(type = 'linePlot')
 u2
 ```

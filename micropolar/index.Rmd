@@ -60,7 +60,7 @@ We are working on some useful examples combining R data with the other `micropol
 
 ```{r linePlot}
 u2 <- rCharts$new()
-u2$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
+u2$setLib('http://timelyportfolio.github.io/howitworks/libraries/widgets/micropolar')
 u2$set(type = 'linePlot')
 u2
 ```
