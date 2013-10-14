@@ -46,7 +46,7 @@ dat = data.frame(
 require(rCharts)
 options(RCHART_HEIGHT = 400, RCHART_WIDTH = 400)
 u1 <- rCharts$new()
-u1$setLib('http://timelyportfolio.github.io/howitworks/libraries/widgets/micropolar')
+u1$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
 u1$set(
   data = make_dataset('x', 'y', dat),
   type = 'dotPlot'
@@ -60,7 +60,7 @@ We are working on some useful examples combining R data with the other `micropol
 
 ```{r linePlot}
 u2 <- rCharts$new()
-u2$setLib('http://timelyportfolio.github.io/howitworks/libraries/widgets/micropolar')
+u2$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
 u2$set(type = 'linePlot')
 u2
 ```
