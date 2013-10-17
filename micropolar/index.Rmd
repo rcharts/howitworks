@@ -12,7 +12,6 @@ assets:
     - "http://fonts.googleapis.com/css?family=PT+Sans"
     - "../assets/css/app.css"
     - "../assets/css/gh-buttons.css"
-    - "http://odyniec.net/articles/turning-lists-into-trees/css/tree.css"
 url: {lib: ../libraries}
 ---
 
