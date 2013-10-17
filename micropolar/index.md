@@ -21,23 +21,42 @@ url: {lib: ../libraries}
 
 I should say that `micropolar` is extremely well designed for reusability.  The author Chris Viau is also a coauthor of the very good book [Developing a D3.js Edge](http://bleedingedgepress.com/our-books/developing-a-d3-js-edge/) that details how to make `d3.js` charts reusable.  Well designed reusable charts integrate easily with `rCharts`.
 
-We need a helper function to transform a data frame to the format required by micropolar.
+### Getting Started
+
+We need a couple of helper functions to transform a data frame to the format required by micropolar, and to create a polar plot.
 
 
 
 
 
 ```r
+# Convert data frame to format required by micropolar
 make_dataset = function(x, y, data = data){
   require(rCharts)
-  lapply(toJSONArray2(data[c(x, y)], json = F, names = F), unlist)
+  toJSONArray2(data[c(x, y)], json = F, names = F)
 }
 
+# Create a polar plot given data and type
+polarPlot <- function(data, type, ...){
+ u <- rCharts$new()
+ u$setLib('http://rcharts.github.io/howitworks/libraries/widgets/micropolar')
+ if (!missing(data)) u$set(data = data)
+ u$set(type = type, ...)
+ return(u)
+}
+```
+
+
+Let us define some data that we can use
+
+
+```r
 dat = data.frame(
   x = c(60, 180, 270, 360),
   y = c(5, 2, 3, 4)
 )
 ```
+
 
 
 ### DotPlot
@@ -46,13 +65,10 @@ dat = data.frame(
 ```r
 require(rCharts)
 options(RCHART_HEIGHT = 400, RCHART_WIDTH = 400)
-u1 <- rCharts$new()
-u1$setLib('http://timelyportfolio.github.io/howitworks/libraries/widgets/micropolar')
-u1$set(
+polarPlot(
   data = make_dataset('x', 'y', dat),
   type = 'dotPlot'
 )
-u1
 ```
 
 <iframe src=assets/fig/dotPlot.html seamless></iframe>
@@ -64,10 +80,7 @@ We are working on some useful examples combining R data with the other `micropol
 
 
 ```r
-u2 <- rCharts$new()
-u2$setLib('http://timelyportfolio.github.io/howitworks/libraries/widgets/micropolar')
-u2$set(type = 'linePlot')
-u2
+polarPlot(type = 'linePlot')
 ```
 
 <iframe src=assets/fig/linePlot.html seamless></iframe>
@@ -77,9 +90,7 @@ u2
 
 
 ```r
-u3 <- u2
-u3$set( type = 'areaChart' )
-u3
+polarPlot(type = 'areaChart')
 ```
 
 <iframe src=assets/fig/areaChart.html seamless></iframe>
@@ -89,9 +100,7 @@ u3
 
 
 ```r
-u4 <- u2
-u4$set( type = 'barChart' )
-u4
+polarPlot(type = 'barChart')
 ```
 
 <iframe src=assets/fig/barChart.html seamless></iframe>
@@ -101,9 +110,7 @@ u4
 
 
 ```r
-u5 <- u2
-u5$set( type = 'clock' )
-u5
+polarPlot(type = 'clock')
 ```
 
 <iframe src=assets/fig/clock.html seamless></iframe>
