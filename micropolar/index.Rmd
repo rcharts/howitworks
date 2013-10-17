@@ -25,7 +25,7 @@ We need a helper function to transform a data frame to the format required by mi
 
 ```{r message = F, echo = F, cache = F}
 library(knitr)
-opts_chunk$set(results = 'asis', comment = NA, tidy = F, cache = F)
+opts_chunk$set(results = 'asis', comment = NA, tidy = F)
 ```
 
 ```{r}
