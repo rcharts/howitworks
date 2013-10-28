@@ -76,7 +76,7 @@
 
 <h3>Inputs</h3>
 
-<p>The <a href="data/questions.csv">question file</a> consists of three columns, representing <code>type</code> of question, the <code>text</code> content of the question and semicolon separated <code>choices</code>. The <a href="data/responses.csv">response file</a> is exported from Google Forms.</p>
+<p>The <a href="https://github.com/rcharts/howitworks/blob/gh-pages/catcorrjs/data/questions.csv">question file</a> consists of three columns, representing <code>type</code> of question, the <code>text</code> content of the question and semicolon separated <code>choices</code>. The <a href="https://github.com/rcharts/howitworks/blob/gh-pages/catcorrjs/data/responses.csv">response file</a> is exported from Google Forms.</p>
 
 <h3>Visualization</h3>
 
@@ -99,7 +99,7 @@
   questions = toJSONArray(questions, json = F)
 
   r1 &lt;- rCharts$new()
-  r1$setLib(&#39;catcorrjs&#39;)
+  r1$setLib(&#39;http://rcharts.github.io/howitworks/catcorrjs/catcorrjs&#39;)
   r1$set(questions = questions, responses = responses)
   r1
 }
