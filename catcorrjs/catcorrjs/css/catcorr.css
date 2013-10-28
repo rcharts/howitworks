@@ -1,0 +1,135 @@
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400);
+
+.catcorr.chart {
+  display: inline-block;
+  height: 151px;
+  margin-bottom: 40px;
+  margin-right: 80px;
+}
+
+.catcorr.reset {
+  padding-left: 1em;
+  font-size: smaller;
+  color: #ccc;
+}
+
+.catcorr.all_background.all_bar.outcome, .catcorr.background.bar.outcome {
+  fill: rgb(107,174,214);
+}
+.catcorr.foreground.bar.outcome, .brush rect.extent.outcome {
+  fill: rgb(49,130,189); 
+}
+
+.catcorr.all_background.all_bar.demographic, .catcorr.background.bar.demographic {
+  fill: rgb(116,196,118);
+}
+.catcorr.foreground.bar.demographic, .catcorr.brush rect.extent.demographic {
+  fill: rgb(49, 163, 84);
+}
+
+.catcorr.asterisk {
+  stroke: none;
+  fill: #eee;
+}
+
+.catcorr.all_proportion.all_bar {
+  stroke: white;
+  stroke-width: 1;
+}
+
+.catcorr.hatching, rect.extent {
+  stroke: black;
+  stroke-width: 1px;
+  stroke-opacity: 0.25;
+}
+
+.catcorr.axis path, .catcorr.axis line, path.catcorr.legend {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.catcorr.axis text, .catcorr.legend {
+  font: 10px sans-serif;
+}
+
+.catcorr.legend {
+  color: black;
+  text-align: left;
+}
+.catcorr.legend.right {
+  text-align: right;
+}
+
+path.catcorr.legend {
+  stroke-dasharray: 2,2;
+}
+
+.catcorr.brush .resize path {
+  fill: #eee;
+  stroke: #666;
+}
+
+aside.catcorr {
+  float: right;
+  color: #aaa;
+  text-align: center;
+}
+
+aside.catcorr span {
+  font-size: 80px;
+  color: #666;
+  font-family: "Yanone Kaffeesatz";
+}
+
+.d3-tip {
+  margin-top: 10px;
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  content: "\25BC";
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+  text-align: center;
+}
+
+.d3-tip.e:after {
+  content: "\25B6";
+  margin: -4px 0 0 -1px;
+  top: 50%;
+  left: 100%;
+}
+
+.d3-tip.s:after {
+  content: "\25B2";
+  margin: 0 0 1px 0;
+  top: -8px;
+  left: 0;
+  text-align: center;
+}
+
+.d3-tip.w:after {
+  content: "\25C0";
+  margin: -4px 0 0 0;
+  top: 50%;
+  left: -8px;
+}

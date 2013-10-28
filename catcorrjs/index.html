@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>rCharts</title>
+    <link rel="stylesheet" href="../libraries/frameworks/minimal/stylesheets/styles.css">
+    <link rel="stylesheet" href="../libraries/highlighters/prettify/css/twitter-bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+        <link rel=stylesheet href="http://fonts.googleapis.com/css?family=PT+Sans"></link>
+<link rel=stylesheet href="../assets/css/app.css"></link>
+<link rel=stylesheet href="../assets/css/gh-buttons.css"></link>
+
+    
+  </head>
+  <body>
+    <div class="wrapper">
+<header>
+  <h1>
+    <img src="http://ramnathv.github.io/rCharts/libraries/frameworks/minimal/images/rCharts.png">
+  </h1>
+  <p></p>
+  
+  <!-- <img width='150px' src='assets/img/'></img>
+  -->
+  <p class="view">
+    <!-- <a href="http://github.com/rcharts/howitworks">
+     View the Project on GitHub <small>rcharts/howitworks</small>
+    </a>
+    <img width='150px' src='assets/img/'></img>
+    -->
+  </p>
+  <ul class='buttons'>
+    <li><a href="https://github.com/rcharts/howitworks/zipball/gh-pages">
+      Download <strong>ZIP File</strong>
+    </a></li>
+    <li><a href="https://github.com/rcharts/howitworks/tarball/gh-pages">
+      Download <strong>TAR Ball</strong>
+    </a></li>
+    <li><a href="http://github.com/rcharts/howitworks">
+      Fork On <strong>GitHub</strong></a>
+    </li>
+  </ul>
+    <ol>
+    </ol>
+  <p><a href='http://rcharts.io'>rCharts</a> is an R package, that helps create, customize and share interactive javascript visualizations from R, using a familiar lattice-like interface. You can install it from <a href='http://ramnathv.github.io/rCharts'>github</a>
+  </p>
+</header>
+
+      <section>
+        <h2>CatCorrJS with rCharts</h2>
+<!-- AddThis Smart Layers BEGIN -->
+
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fdfcfd4773d48d3"></script>
+
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'transparent',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }   
+  });
+</script>
+
+<!-- AddThis Smart Layers END -->
+
+<p><a href="http://deanmalmgren.github.io/catcorrjs/">CatCorrJS</a> is a library that combines  <code>d3.js</code> and <code>crossfilter.js</code> to make it easy to visualize relationships between categorical variables (e.g., results from a survey). This is an attempt to integrate it with rCharts.</p>
+
+<p>The basic idea of the rCharts function integrating this library is to accept two csv files as inputs, one with the questions, and the other with the responses, and return an interactive visualization.</p>
+
+<h3>Inputs</h3>
+
+<p>The <a href="data/questions.csv">question file</a> consists of three columns, representing <code>type</code> of question, the <code>text</code> content of the question and semicolon separated <code>choices</code>. The <a href="data/responses.csv">response file</a> is exported from Google Forms.</p>
+
+<h3>Visualization</h3>
+
+<p>The <code>catCorrPlot</code> function reads the two csv files with questions and responses, processes the data to create a json payload that is accepted by the <a href="http://deanmalmgren.github.io/catcorrjs/">CatCorrJS</a> library, and finally uses the <code>rCharts</code> base class to produce an interactive visualization.</p>
+
+<pre><code>catCorrPlot &lt;- function(questions_doc, responses_doc){
+  require(rCharts)
+  responses = read.csv(responses_doc)
+  responses = toJSONArray(setNames(
+     responses[,-1], 1:(NCOL(responses) - 1)
+  ), json = F)
+
+  questions = read.csv(questions_doc, stringsAsFactors = F)
+  questions = lapply(1:NROW(questions), function(i){
+    qi = as.list(questions[i,])
+    qi$choices = strsplit(qi$choices, &quot;;&quot;)[[1]]
+    qi$number = i
+    qi
+  })
+  questions = toJSONArray(questions, json = F)
+
+  r1 &lt;- rCharts$new()
+  r1$setLib(&#39;catcorrjs&#39;)
+  r1$set(questions = questions, responses = responses)
+  r1
+}
+</code></pre>
+
+<p>We can now use this function to create an interactive visualization of the survey</p>
+
+<pre><code>r1 &lt;- catCorrPlot(&quot;data/questions.csv&quot;, &quot;data/responses.csv&quot;)
+</code></pre>
+
+<iframe src='./catCorrPlot.html' seamless></iframe>
+
+<h3>ToDos.</h3>
+
+<p>As an extension, I am working on a prototype, that would simplify workflow considerably by allowing a user to author a survey in RMarkdown, automagically create a google form based on it, and view the results as a dynamic interactive visualization.</p>
+
+<h3>Acknowledgements</h3>
+
+<p>All the heavy-lifting in creating this visualization is the work of <a href="http://about.me/dean.malmgren">Dean Malmgren</a> and his awesome <a href="http://deanmalmgren.github.io/catcorrjs/">CatCorrJS</a>. <a href="http://rcharts.io">rCharts</a> merely provides a wrapper to integrate this library into an #rstats workflow.</p>
+
+<div id='disqus_thread'></div>
+
+<style>
+iframe {
+  height: 1300px;
+}
+</style>
+
+      </section>
+      <footer>
+        <p>Maintained by <a href="http://github.com/rcharts">
+          Ramnath Vaidyanathan
+        </a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by 
+          <a href="https://github.com/orderedlist">orderedlist</a></small>
+        </p>
+      </footer>    </div>
+    <script src="../libraries/frameworks/minimal/javascripts/scale.fix.js"></script>
+  </body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <script type="text/javascript">
+    var disqus_shortname = 'rcharts';
+    (function() {
+      var dsq = document.createElement('script'); 
+      dsq.type = 'text/javascript'; 
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-36046354-2', 'rcharts.io');
+    ga('send', 'pageview');
+  
+  </script>
+  <!-- Google Prettify -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+  <script src='../libraries/highlighters/prettify/js/lang-r.js'></script>
+  <script>
+    var pres = document.getElementsByTagName("pre");
+    for (var i=0; i < pres.length; ++i) {
+      pres[i].className = "prettyprint linenums";
+    }
+    prettyPrint();
+  </script>
+  <!-- End Google Prettify --> 
+  </html>

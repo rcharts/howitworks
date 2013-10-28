@@ -1,0 +1,284 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    <link rel='stylesheet' href='catcorrjs/css/catcorr.css'>
+    
+    <script src='catcorrjs/js/d3.v3.min.js' type='text/javascript'></script>
+    <script src='catcorrjs/js/crossfilter.min.js' type='text/javascript'></script>
+    <script src='catcorrjs/js/catcorr.min.js' type='text/javascript'></script>
+    <script src='catcorrjs/js/d3.tip.min.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 600px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body>
+    <div id='charte1c6a99a7d1' class='rChart catcorrjs'></div>  
+    
+    <script type='text/javascript'>
+var cccharte1c6a99a7d1 = catcorr("#charte1c6a99a7d1", {
+ "dom": "charte1c6a99a7d1",
+"width":    600,
+"height":    400,
+"questions": [
+ {
+ "type": "outcome",
+"text": "Which came first",
+"choices": [ "Chicken", "Egg" ],
+"number": 1 
+},
+{
+ "type": "outcome",
+"text": "Do you hit the snooze button?",
+"choices": [ "No", "Yes" ],
+"number": 2 
+},
+{
+ "type": "outcome",
+"text": "If I was a zombie, I would...",
+"choices": [ "preferentially chase small children.", "seek out police officers and others with shotguns.", "learn to drive stick." ],
+"number": 3 
+},
+{
+ "type": "outcome",
+"text": "What is your favorite day of the week",
+"choices": [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ],
+"number": 4 
+},
+{
+ "type": "demographic",
+"text": "What is your gender?",
+"choices": [ "Male", "Female" ],
+"number": 5 
+},
+{
+ "type": "demographic",
+"text": "Age",
+"choices": [ "Teenie bopper", "20-something", "Parent age", "Grandparent age" ],
+"number": 6 
+} 
+],
+"responses": [
+ {
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Tuesday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Egg",
+"2": "No",
+"3": "preferentially chase small children.",
+"4": "Friday",
+"5": "Male",
+"6": "20-something" 
+},
+{
+ "1": "Egg",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Thursday",
+"5": "Male",
+"6": "Grandparent age" 
+},
+{
+ "1": "Chicken",
+"2": "No",
+"3": "preferentially chase small children.",
+"4": "Friday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Wednesday",
+"5": "",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Sunday",
+"5": "Male",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Sunday",
+"5": "Male",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Sunday",
+"5": "Male",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Sunday",
+"5": "Male",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Sunday",
+"5": "Male",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Sunday",
+"5": "Male",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Sunday",
+"5": "Male",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Egg",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Tuesday",
+"5": "Female",
+"6": "Grandparent age" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Thursday",
+"5": "Male",
+"6": "20-something" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Thursday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Monday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Saturday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Tuesday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Thursday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "No",
+"3": "seek out police officers and others with shotguns.",
+"4": "Wednesday",
+"5": "Female",
+"6": "Parent age" 
+},
+{
+ "1": "Egg",
+"2": "No",
+"3": "seek out police officers and others with shotguns.",
+"4": "Sunday",
+"5": "Male",
+"6": "Teenie bopper" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "seek out police officers and others with shotguns.",
+"4": "Sunday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "preferentially chase small children.",
+"4": "Saturday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Friday",
+"5": "Male",
+"6": "Parent age" 
+},
+{
+ "1": "Chicken",
+"2": "No",
+"3": "learn to drive stick.",
+"4": "Friday",
+"5": "Male",
+"6": "20-something" 
+},
+{
+ "1": "Chicken",
+"2": "Yes",
+"3": "learn to drive stick.",
+"4": "Monday",
+"5": "Male",
+"6": "Parent age" 
+} 
+],
+"id": "charte1c6a99a7d1" 
+});
+</script>
+    
+  </body>
+</html>

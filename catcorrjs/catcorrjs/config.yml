@@ -1,0 +1,3 @@
+catcorrjs:
+  jshead: [js/d3.v3.min.js, js/crossfilter.min.js, js/catcorr.min.js, js/d3.tip.min.js]
+  css: [css/catcorr.css]
