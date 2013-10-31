@@ -126,10 +126,12 @@ We can draw an area chart by passing some extra arguments to the line chart plot
 
 
 ```r
-r2 <- ePlot("year", "exp", data = usp, group = "category", type = "line", smooth = TRUE, 
-    itemStyle = list(normal = list(areaStyle = list(type = "default"))))
+r2 <- ePlot('year', 'exp', data = usp, group = 'category', 
+  type = 'line', smooth = TRUE, 
+  itemStyle = list(normal = list(areaStyle = list(type = 'default')))
+)
 
-r2$save("area_chart.html", static = F)
+r2$save('area_chart.html', static = F)
 ```
 
 

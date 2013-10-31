@@ -152,10 +152,12 @@ r1$save(&#39;line_chart.html&#39;, static = F)
 
 <p>We can draw an area chart by passing some extra arguments to the line chart plot.</p>
 
-<pre><code class="r">r2 &lt;- ePlot(&quot;year&quot;, &quot;exp&quot;, data = usp, group = &quot;category&quot;, type = &quot;line&quot;, smooth = TRUE, 
-    itemStyle = list(normal = list(areaStyle = list(type = &quot;default&quot;))))
+<pre><code class="r">r2 &lt;- ePlot(&#39;year&#39;, &#39;exp&#39;, data = usp, group = &#39;category&#39;, 
+  type = &#39;line&#39;, smooth = TRUE, 
+  itemStyle = list(normal = list(areaStyle = list(type = &#39;default&#39;)))
+)
 
-r2$save(&quot;area_chart.html&quot;, static = F)
+r2$save(&#39;area_chart.html&#39;, static = F)
 </code></pre>
 
 <iframe src='area_chart.html' seamless></iframe>
