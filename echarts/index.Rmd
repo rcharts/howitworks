@@ -71,7 +71,8 @@ ePlot <- function(x, y, data, group, type, colors, ...){
       list(
         name = d[[group]][1],
         type = type,
-        data = d[[y]]
+        data = d[[y]],
+        ...
       )
     }), NULL) 
   }
@@ -115,23 +116,39 @@ r1$save('line_chart.html', static = F)
 
 <iframe src='line_chart.html' seamless></iframe>
 
+#### Area Chart
+
+We can draw an area chart by passing some extra arguments to the line chart plot.
+
+```{r}
+r2 <- ePlot('year', 'exp', data = usp, group = 'category', 
+  type = 'line', smooth = TRUE, 
+  itemStyle = list(normal = list(areaStyle = list(type = 'default')))
+)
+
+r2$save('area_chart.html', static = F)
+```
+
+<iframe src='area_chart.html' seamless></iframe>
+
+
 #### Bar Chart
 
 Let us now draw a bar chart. We will turn on some cool features in echarts using the `set` method.
 
 ```{r results = 'hide', tidy = F}
 hair_eye_male = subset(as.data.frame(HairEyeColor), Sex == "Male")
-r2 <- ePlot('Hair', 'Freq', data = hair_eye_male, group = 'Eye', 
+r3 <- ePlot('Hair', 'Freq', data = hair_eye_male, group = 'Eye', 
   type = 'bar', colors = c('brown', 'blue', 'yellow', 'green'))
-r2$set(tooltip = list(trigger = 'axis'))
-r2$set(toolbox = list(
+r3$set(tooltip = list(trigger = 'axis'))
+r3$set(toolbox = list(
   show = TRUE, 
   feature = list(
     mark = TRUE,
     saveAsImage = TRUE
   ))
 )
-r2$save('bar_chart.html', static = F)
+r3$save('bar_chart.html', static = F)
 ```
 
 <iframe src='bar_chart.html' seamless></iframe>

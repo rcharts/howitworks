@@ -17,7 +17,7 @@
     
   </head>
   <body>
-    <div id='chart5f8f5b6b604' class='rChart echarts'></div>  
+    <div id='chart5f8f5cbc7fd' class='rChart echarts'></div>  
     
     <script type='text/javascript'>
     // Step:3 conifg ECharts's path, link to echarts.js from current page.
@@ -51,74 +51,89 @@
     ],
     function(ec) {
       var eC = ec.init(
-        document.getElementById('chart5f8f5b6b604')
+        document.getElementById('chart5f8f5cbc7fd')
       );
-      var chartParamschart5f8f5b6b604 = {
- "dom": "chart5f8f5b6b604",
+      var chartParamschart5f8f5cbc7fd = {
+ "dom": "chart5f8f5cbc7fd",
 "width":    575,
 "height":    400,
 "series": [
  {
- "name": "Brown",
-"type": "bar",
-"data": [     32,     53,     10,      3 ],
+ "name": "Food and Tobacco",
+"type": "line",
+"data": [   22.2,   44.5,   59.6,   73.2,   86.8 ],
+"smooth": true,
 "itemStyle": {
  "normal": {
- "color": "brown" 
+ "areaStyle": {
+ "type": "default" 
+} 
 } 
 } 
 },
 {
- "name": "Blue",
-"type": "bar",
-"data": [     11,     50,     10,     30 ],
+ "name": "Household Operation",
+"type": "line",
+"data": [   10.5,   15.5,     29,   36.5,   46.2 ],
+"smooth": true,
 "itemStyle": {
  "normal": {
- "color": "blue" 
+ "areaStyle": {
+ "type": "default" 
+} 
 } 
 } 
 },
 {
- "name": "Hazel",
-"type": "bar",
-"data": [     10,     25,      7,      5 ],
+ "name": "Medical and Health",
+"type": "line",
+"data": [   3.53,   5.76,   9.71,     14,   21.1 ],
+"smooth": true,
 "itemStyle": {
  "normal": {
- "color": "yellow" 
+ "areaStyle": {
+ "type": "default" 
+} 
 } 
 } 
 },
 {
- "name": "Green",
-"type": "bar",
-"data": [      3,     15,      7,      8 ],
+ "name": "Personal Care",
+"type": "line",
+"data": [   1.04,   1.98,   2.45,    3.4,    5.4 ],
+"smooth": true,
 "itemStyle": {
  "normal": {
- "color": "green" 
+ "areaStyle": {
+ "type": "default" 
+} 
+} 
+} 
+},
+{
+ "name": "Private Education",
+"type": "line",
+"data": [  0.341,  0.974,    1.8,    2.6,   3.64 ],
+"smooth": true,
+"itemStyle": {
+ "normal": {
+ "areaStyle": {
+ "type": "default" 
+} 
 } 
 } 
 } 
 ],
 "xAxis": {
  "type": "category",
-"data": [ "Black", "Brown", "Red", "Blond" ] 
+"data": [ 1940, 1945, 1950, 1955, 1960 ] 
 },
 "legend": {
- "data": [ "Brown", "Blue", "Hazel", "Green" ] 
+ "data": [ "Food and Tobacco", "Household Operation", "Medical and Health", "Personal Care", "Private Education" ] 
 },
-"tooltip": {
- "trigger": "axis" 
-},
-"toolbox": {
- "show": true,
-"feature": {
- "mark": true,
-"saveAsImage": true 
-} 
-},
-"id": "chart5f8f5b6b604" 
+"id": "chart5f8f5cbc7fd" 
 }           
-      eC.setOption(chartParamschart5f8f5b6b604);
+      eC.setOption(chartParamschart5f8f5cbc7fd);
     }
     );
 </script>

@@ -105,7 +105,8 @@
       list(
         name = d[[group]][1],
         type = type,
-        data = d[[y]]
+        data = d[[y]],
+        ...
       )
     }), NULL) 
   }
@@ -147,22 +148,34 @@ r1$save(&#39;line_chart.html&#39;, static = F)
 
 <iframe src='line_chart.html' seamless></iframe>
 
+<h4>Area Chart</h4>
+
+<p>We can draw an area chart by passing some extra arguments to the line chart plot.</p>
+
+<pre><code class="r">r2 &lt;- ePlot(&quot;year&quot;, &quot;exp&quot;, data = usp, group = &quot;category&quot;, type = &quot;line&quot;, smooth = TRUE, 
+    itemStyle = list(normal = list(areaStyle = list(type = &quot;default&quot;))))
+
+r2$save(&quot;area_chart.html&quot;, static = F)
+</code></pre>
+
+<iframe src='area_chart.html' seamless></iframe>
+
 <h4>Bar Chart</h4>
 
 <p>Let us now draw a bar chart. We will turn on some cool features in echarts using the <code>set</code> method.</p>
 
 <pre><code class="r">hair_eye_male = subset(as.data.frame(HairEyeColor), Sex == &quot;Male&quot;)
-r2 &lt;- ePlot(&#39;Hair&#39;, &#39;Freq&#39;, data = hair_eye_male, group = &#39;Eye&#39;, 
+r3 &lt;- ePlot(&#39;Hair&#39;, &#39;Freq&#39;, data = hair_eye_male, group = &#39;Eye&#39;, 
   type = &#39;bar&#39;, colors = c(&#39;brown&#39;, &#39;blue&#39;, &#39;yellow&#39;, &#39;green&#39;))
-r2$set(tooltip = list(trigger = &#39;axis&#39;))
-r2$set(toolbox = list(
+r3$set(tooltip = list(trigger = &#39;axis&#39;))
+r3$set(toolbox = list(
   show = TRUE, 
   feature = list(
     mark = TRUE,
     saveAsImage = TRUE
   ))
 )
-r2$save(&#39;bar_chart.html&#39;, static = F)
+r3$save(&#39;bar_chart.html&#39;, static = F)
 </code></pre>
 
 <iframe src='bar_chart.html' seamless></iframe>
