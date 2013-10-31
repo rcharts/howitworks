@@ -91,7 +91,7 @@ ePlot <- function(x, y, data, group, type, colors, ...){
   }
 
   r1 <- rCharts$new()
-  r1$setLib('eCharts')
+  r1$setLib('echarts')
   r1$set(series = series, xAxis = xAxis, legend = legend)
   r1
 }
