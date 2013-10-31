@@ -1,0 +1,39 @@
+<script type='text/javascript'>
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    var jsurl = '{{{ lib }}}' + '/js/echarts-map'
+    require.config({
+    paths:{ 
+        'echarts': jsurl,
+        'echarts/chart/bar' : jsurl,
+        'echarts/chart/line': jsurl,
+        'echarts/chart/scatter': jsurl,
+        'echarts/chart/k': jsurl,
+        'echarts/chart/pie': jsurl,
+        'echarts/chart/map': jsurl,
+        'echarts/chart/force': jsurl,
+        'echarts/chart/radar': jsurl
+    }
+    });
+
+    // Step:4 require echarts and use it in the callback.
+    require(
+    [
+        'echarts',
+        'echarts/chart/bar',
+        'echarts/chart/line',
+        'echarts/chart/scatter',
+        'echarts/chart/k',
+        'echarts/chart/pie',
+        'echarts/chart/map',
+        'echarts/chart/force',
+        'echarts/chart/radar'
+    ],
+    function(ec) {
+      var eC{{chartId}}} = ec.init(
+        document.getElementById('{{{ chartId }}}')
+      );
+      var chartParams{{{ chartId }}} = {{{ chartParams }}}           
+      eC{{chartId}}}.setOption(chartParams{{{ chartId }}});
+    }
+    );
+</script>

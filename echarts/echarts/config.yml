@@ -1,0 +1,4 @@
+echarts:
+  jshead: [js/esl.js]
+  cdn:
+    jshead: 'http://efe.baidu.com/echarts/doc/example/www/js/esl.js'

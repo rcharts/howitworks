@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>rCharts</title>
+    <link rel="stylesheet" href="../libraries/frameworks/minimal/stylesheets/styles.css">
+    <link rel="stylesheet" href="../libraries/highlighters/prettify/css/twitter-bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+        <link rel=stylesheet href="http://fonts.googleapis.com/css?family=PT+Sans"></link>
+<link rel=stylesheet href="../assets/css/app.css"></link>
+<link rel=stylesheet href="../assets/css/gh-buttons.css"></link>
+
+    
+  </head>
+  <body>
+    <div class="wrapper">
+<header>
+  <h1>
+    <img src="http://ramnathv.github.io/rCharts/libraries/frameworks/minimal/images/rCharts.png">
+  </h1>
+  <p></p>
+  
+  <!-- <img width='150px' src='assets/img/'></img>
+  -->
+  <p class="view">
+    <!-- <a href="http://github.com/rcharts/howitworks">
+     View the Project on GitHub <small>rcharts/howitworks</small>
+    </a>
+    <img width='150px' src='assets/img/'></img>
+    -->
+  </p>
+  <ul class='buttons'>
+    <li><a href="https://github.com/rcharts/howitworks/zipball/gh-pages">
+      Download <strong>ZIP File</strong>
+    </a></li>
+    <li><a href="https://github.com/rcharts/howitworks/tarball/gh-pages">
+      Download <strong>TAR Ball</strong>
+    </a></li>
+    <li><a href="http://github.com/rcharts/howitworks">
+      Fork On <strong>GitHub</strong></a>
+    </li>
+  </ul>
+    <ol>
+    </ol>
+  <p><a href='http://rcharts.io'>rCharts</a> is an R package, that helps create, customize and share interactive javascript visualizations from R, using a familiar lattice-like interface. You can install it from <a href='http://ramnathv.github.io/rCharts'>github</a>
+  </p>
+</header>
+
+      <section>
+        <h2>eCharts with rCharts</h2>
+<!-- AddThis Smart Layers BEGIN -->
+
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fdfcfd4773d48d3"></script>
+
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'transparent',
+    'share' : {
+      'position' : 'left',
+      'numPreferredServices' : 5
+    }   
+  });
+</script>
+
+<!-- AddThis Smart Layers END -->
+
+<p><a href="http://rcharts.io">rCharts</a> aspires to be a meta-framework, that allows users to plug in arbitrary javascript visualization libraries with minimal effort. The main advantage of integrating with rCharts is the standardized plotting interface and accompanying support functions that allow charts to be published as standalone charts or as a part of an interactive document or web application.</p>
+
+<p>Recently, I came to know about <a href="http://ecomfe.github.io/echarts/">echarts</a>, an interesting visualization library with an extensive set of features built by folks at <a href="http://www.baidu.com">baidu</a>. Now, the documentation of <a href="http://ecomfe.github.io/echarts/">echarts</a> is in Chinese, but fortunately Google Translate does a pretty good job of translating it into English.</p>
+
+<p>I thought it would be interesting for me to share with you, how I went about the task of integrating <a href="http://ecomfe.github.io/echarts/">echarts</a>.</p>
+
+<h3>Getting Started</h3>
+
+<p>The first step is to understand the structure of the html based on an example. I found an excellent example as seen <a href="echarts/index.html">here</a>. As discussed in my <a href="http://rcharts.io/howitworks">post</a>, I went about creating a folder structure for echarts.</p>
+
+<pre><code>echarts
+  config.yml
+  js
+    echarts-map.js
+    echarts.js
+    esl.js
+  layouts
+    chart.html
+</code></pre>
+
+<p>I copied the <a href="echarts/index.html">example code</a> to <a href="echarts/layouts/chart.html">chart.html</a> and stripped the layout off all the data, which will be provided by R.</p>
+
+<h3>Data</h3>
+
+<p>One of the main reasons it is hard working with different javascript visualization libraries is because they all seem to choose different data structures for the chart payload. Standardizing some aspects of the data structure can go a long way in providing a unified interface for chart specification. </p>
+
+<p>Since rCharts already has a standardized interface for specifying a chart, we need to translate it to the data structure used by echarts. Shown below is a simple <code>ePlot</code> function that does the grunt work in translating the data, and creating a simple chart.</p>
+
+<pre><code class="r">ePlot &lt;- function(x, y, data, group, type, colors, ...){
+  require(rCharts); require(plyr)
+  if (!missing(group)){
+    series = setNames(dlply(data, group, function(d){
+      list(
+        name = d[[group]][1],
+        type = type,
+        data = d[[y]]
+      )
+    }), NULL) 
+  }
+  xAxis = list(
+    type = &#39;category&#39;,
+    data = unique(data[[x]])
+  )
+  legend = list(
+    data = unique(data[[group]])
+  )
+  if (!missing(colors)){
+    series = lapply(seq_along(series), function(i){
+       series[[i]]$itemStyle = list(normal = list(color = colors[i]))
+       return(series[[i]])
+    })
+  }
+
+  r1 &lt;- rCharts$new()
+  r1$setLib(&#39;eCharts&#39;)
+  r1$set(series = series, xAxis = xAxis, legend = legend)
+  r1
+}
+</code></pre>
+
+<h3>Demo</h3>
+
+<p>Now that we have a plotting function in place, we can experiment with creating different types of charts. </p>
+
+<h4>Line Chart</h4>
+
+<p>Let us start with a simple line chart, using the <code>USPersonalExpenditure</code> dataset.</p>
+
+<pre><code class="r">library(reshape2); library(knitr); library(rCharts)
+options(RCHART_WIDTH = 575, RCHART_HEIGHT = 400)
+usp &lt;- setNames(melt(USPersonalExpenditure), c(&#39;category&#39;, &#39;year&#39;, &#39;exp&#39;))
+r1 &lt;- ePlot(&#39;year&#39;, &#39;exp&#39;, data = usp, group = &#39;category&#39;, type = &#39;line&#39;)
+r1$save(&#39;line_chart.html&#39;, static = F)
+</code></pre>
+
+<iframe src='line_chart.html' seamless></iframe>
+
+<h4>Bar Chart</h4>
+
+<p>Let us now draw a bar chart. We will turn on some cool features in echarts using the <code>set</code> method.</p>
+
+<pre><code class="r">hair_eye_male = subset(as.data.frame(HairEyeColor), Sex == &quot;Male&quot;)
+r2 &lt;- ePlot(&#39;Hair&#39;, &#39;Freq&#39;, data = hair_eye_male, group = &#39;Eye&#39;, 
+  type = &#39;bar&#39;, colors = c(&#39;brown&#39;, &#39;blue&#39;, &#39;yellow&#39;, &#39;green&#39;))
+r2$set(tooltip = list(trigger = &#39;axis&#39;))
+r2$set(toolbox = list(
+  show = TRUE, 
+  feature = list(
+    mark = TRUE,
+    saveAsImage = TRUE
+  ))
+)
+r2$save(&#39;bar_chart.html&#39;, static = F)
+</code></pre>
+
+<iframe src='bar_chart.html' seamless></iframe>
+
+<h3>Next Steps</h3>
+
+<p><a href="http://ecomfe.github.io/echarts/">echarts</a> supports a really extensive feature set and needs further exploration. There are some differences in the data structure for some charts, and that would mean writing more transformation functions to ensure that the end-user does not require to be aware of these idiosyncracies. </p>
+
+<div id='disqus_thread'></div>
+
+<style>
+iframe {
+  height: 400px;
+  width: 600px;
+}
+</style>
+
+      </section>
+      <footer>
+        <p>Maintained by <a href="http://github.com/rcharts">
+          Ramnath Vaidyanathan
+        </a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by 
+          <a href="https://github.com/orderedlist">orderedlist</a></small>
+        </p>
+      </footer>    </div>
+    <script src="../libraries/frameworks/minimal/javascripts/scale.fix.js"></script>
+  </body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <script type="text/javascript">
+    var disqus_shortname = 'rcharts';
+    (function() {
+      var dsq = document.createElement('script'); 
+      dsq.type = 'text/javascript'; 
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-36046354-2', 'rcharts.io');
+    ga('send', 'pageview');
+  
+  </script>
+  <!-- Google Prettify -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+  <script src='../libraries/highlighters/prettify/js/lang-r.js'></script>
+  <script>
+    var pres = document.getElementsByTagName("pre");
+    for (var i=0; i < pres.length; ++i) {
+      pres[i].className = "prettyprint linenums";
+    }
+    prettyPrint();
+  </script>
+  <!-- End Google Prettify --> 
+  </html>
