@@ -158,6 +158,10 @@ r3$save('bar_chart.html', static = F)
 
 [echarts](http://ecomfe.github.io/echarts/) supports a really extensive feature set and needs further exploration. There are some differences in the data structure for some charts, and that would mean writing more transformation functions to ensure that the end-user does not require to be aware of these idiosyncracies. 
 
+### Acknowledgements
+
+I would like to acknowledge [Taiyun](https://github.com/taiyun) and his implementation of [echarts](https://github.com/taiyun/recharts).
+
 <div id='disqus_thread'></div>
 
 <style>
