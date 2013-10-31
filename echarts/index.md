@@ -168,7 +168,7 @@ r3$save('bar_chart.html', static = F)
 
 ### Acknowledgements
 
-I would like to acknowledge [Taiyun](https://github.com/taiyun) and his implementation of [echarts](https://github.com/taiyun/recharts).
+I would like to thank [Lin Feng](https://github.com/kener) for creating a brilliant visualization library. I would also like to acknowledge [Taiyun](https://github.com/taiyun) and his implementation of [echarts](https://github.com/taiyun/recharts). 
 
 <div id='disqus_thread'></div>
 
