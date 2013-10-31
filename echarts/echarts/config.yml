@@ -1,4 +1,4 @@
 echarts:
   jshead: [js/esl.js]
   cdn:
-    jshead: 'http://efe.baidu.com/echarts/doc/example/www/js/esl.js'
+    jshead: 'http://rcharts.github.io/echarts/echarts/js/esl.js'
