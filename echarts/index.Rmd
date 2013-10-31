@@ -52,7 +52,7 @@ echarts
     chart.html
 ```
 
-I copied the [example code](echarts/index.html) to [chart.html](echarts/layouts/chart.html) and stripped the layout off all the data, which will be provided by R.
+I copied the [example code](echarts/index.html) to [chart.html](http://github.com/rcharts/howitworks/blob/gh-pages/echarts/echarts/layouts/chart.html) and stripped the layout off all the data, which will be provided by R.
     
 
 ### Data
