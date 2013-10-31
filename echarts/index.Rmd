@@ -96,9 +96,10 @@ ePlot <- function(x, y, data, group, type, colors, ...){
 }
 ```
 
+
 ### Demo
 
-Now that we have a plotting function in place, we can experiment with creating different types of charts. 
+Now that we have a plotting function in place, we can experiment with creating different types of charts. In order to run this code, you will need to download this repository and navigate to the `echarts` folder so that the `setLib` method in `ePlot` points to the correct location of the library files.
 
 #### Line Chart
 
