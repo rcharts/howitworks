@@ -33,7 +33,7 @@ url: {lib: ../libraries}
 
 [rCharts](http://rcharts.io) aspires to be a meta-framework, that allows users to plug in arbitrary javascript visualization libraries with minimal effort. The main advantage of integrating with rCharts is the standardized plotting interface and accompanying support functions that allow charts to be published as standalone charts or as a part of an interactive document or web application.
 
-Recently, I came to know about [echarts](http://ecomfe.github.io/echarts/), an interesting visualization library with an extensive set of features built by folks at [baidu](http://www.baidu.com). Now, the documentation of [echarts](http://ecomfe.github.io/echarts/) is in Chinese, but fortunately Google Translate does a pretty good job of translating it into English.
+Recently, I came to know about [echarts](http://ecomfe.github.io/echarts/), an interesting visualization library with an extensive set of features built by [Lin Feng](https://github.com/kener) at [baidu](http://www.baidu.com). Now, the documentation of [echarts](http://ecomfe.github.io/echarts/) is in Chinese, but fortunately Google Translate does a pretty good job of translating it into English.
 
 I thought it would be interesting for me to share with you, how I went about the task of integrating [echarts](http://ecomfe.github.io/echarts/).
 
