@@ -161,6 +161,56 @@ r3$save('bar_chart.html', static = F)
 
 <iframe src='bar_chart.html' seamless></iframe>
 
+#### Candlestick Chart
+
+We can draw a candlestick chart using `echarts`. Let us first fetch the data required using the `quantmod` package
+
+
+```r
+library(quantmod)
+getSymbols("GS")
+x = candleChart(GS,multi.col=TRUE,theme='white', plot = F) 
+data_ = as.matrix(x@xdata)
+```
+
+
+We can now draw a candlestick chart
+
+
+```r
+require(rCharts)
+r1 <- rCharts$new()
+r1$setLib('echarts')
+r1$set(series = list(list(
+  name = 'GS',
+  data = toJSONArray2(data_[,1:4], names = F, json = F),
+  type = 'k'
+)))
+r1$set(xAxis = list(list(
+ type  = 'category',
+ data = gsub("-", "/", rownames(data_))
+)))
+r1$set(yAxis = list(list(
+  type = 'value',
+  scale = TRUE
+)))
+r1$set(tooltip = list(
+  trigger = 'axis'  
+))
+r1$set(dataZoom = list(
+  show = TRUE,
+  realtime = TRUE,
+  start = 0,
+  end = 50 
+))
+r1
+r1$save('candlestick_chart.html', static = F)
+```
+
+
+<iframe src='candlestick_chart.html' seamless height=500 style='margin-bottom:60px;'></iframe>
+
+
 
 ### Next Steps
 

@@ -182,6 +182,49 @@ r3$save(&#39;bar_chart.html&#39;, static = F)
 
 <iframe src='bar_chart.html' seamless></iframe>
 
+<h4>Candlestick Chart</h4>
+
+<p>We can draw a candlestick chart using <code>echarts</code>. Let us first fetch the data required using the <code>quantmod</code> package</p>
+
+<pre><code class="r">library(quantmod)
+getSymbols(&quot;GS&quot;)
+x = candleChart(GS,multi.col=TRUE,theme=&#39;white&#39;, plot = F) 
+data_ = as.matrix(x@xdata)
+</code></pre>
+
+<p>We can now draw a candlestick chart</p>
+
+<pre><code class="r">require(rCharts)
+r1 &lt;- rCharts$new()
+r1$setLib(&#39;echarts&#39;)
+r1$set(series = list(list(
+  name = &#39;GS&#39;,
+  data = toJSONArray2(data_[,1:4], names = F, json = F),
+  type = &#39;k&#39;
+)))
+r1$set(xAxis = list(list(
+ type  = &#39;category&#39;,
+ data = gsub(&quot;-&quot;, &quot;/&quot;, rownames(data_))
+)))
+r1$set(yAxis = list(list(
+  type = &#39;value&#39;,
+  scale = TRUE
+)))
+r1$set(tooltip = list(
+  trigger = &#39;axis&#39;  
+))
+r1$set(dataZoom = list(
+  show = TRUE,
+  realtime = TRUE,
+  start = 0,
+  end = 50 
+))
+r1
+r1$save(&#39;candlestick_chart.html&#39;, static = F)
+</code></pre>
+
+<iframe src='candlestick_chart.html' seamless height=500 style='margin-bottom:60px;'></iframe>
+
 <h3>Next Steps</h3>
 
 <p><a href="http://ecomfe.github.io/echarts/">echarts</a> supports a really extensive feature set and needs further exploration. There are some differences in the data structure for some charts, and that would mean writing more transformation functions to ensure that the end-user does not require to be aware of these idiosyncracies. </p>
